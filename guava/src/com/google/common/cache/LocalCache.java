@@ -155,7 +155,8 @@ final class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<
    * ordering information is updated. This is used to avoid lock contention by recording a memento
    * of reads and delaying a lock acquisition until the threshold is crossed or a mutation occurs.
    *
-   * <p>This must be a (2^n)-1 as it is used as a mask.
+   * <p>This must be a (2^n)-1 as it is used as a mask. The current value of {@code 0x1F}
+   * allows up to 31 buffered operations before requiring a drain.
    */
   static final int DRAIN_THRESHOLD = 0x3F;
 
@@ -166,13 +167,20 @@ final class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<
   // TODO(fry): empirically optimize this
   static final int DRAIN_MAX = 16;
 
+  /**
+   * Default threshold factor used to determine when a segment should be cleaned up.
+   * When the ratio of stale entries exceeds this factor, a cleanup is triggered.
+   */
+  static final double CLEANUP_THRESHOLD_FACTOR = 0.75;
+
   // Fields
 
   static final Logger logger = Logger.getLogger(LocalCache.class.getName());
 
   /**
    * Mask value for indexing into segments. The upper bits of a key's hash code are used to choose
-   * the segment.
+   * the segment. This value is always equal to {@code segments.length - 1}, ensuring that the
+   * bitwise AND operation {@code hash & segmentMask} produces a valid segment index.
    */
   final int segmentMask;
 
@@ -185,13 +193,23 @@ final class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<
   /** The segments, each of which is a specialized hash table. */
   final Segment<K, V>[] segments;
 
-  /** The concurrency level. */
+  /**
+   * The number of concurrent update operations supported. This value is used to partition
+   * the internal hash table into segments, each of which can be independently locked.
+   */
   final int concurrencyLevel;
 
-  /** Strategy for comparing keys. */
+  /**
+   * Strategy for comparing keys. Determines when two key references are considered equal.
+   * Defaults to {@link Equivalence#equals()} for strong keys, or identity-based equivalence
+   * for weak/soft keys.
+   */
   final Equivalence<Object> keyEquivalence;
 
-  /** Strategy for comparing values. */
+  /**
+   * Strategy for comparing values. Used to determine when a value has changed,
+   * particularly relevant for cache refresh operations and value-based eviction.
+   */
   final Equivalence<Object> valueEquivalence;
 
   /** Strategy for referencing keys. */

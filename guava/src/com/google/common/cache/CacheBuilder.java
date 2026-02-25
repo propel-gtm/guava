@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.CheckForNull;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -282,8 +283,10 @@ public final class CacheBuilder<K, V> {
 
   static final int UNSET_INT = -1;
 
+  /** Whether to enforce strict parsing of cache builder specifications. */
   boolean strictParsing = true;
 
+  /** The minimum total size for internal hash tables, or {@link #UNSET_INT} if not configured. */
   int initialCapacity = UNSET_INT;
   int concurrencyLevel = UNSET_INT;
   long maximumSize = UNSET_INT;
@@ -299,6 +302,10 @@ public final class CacheBuilder<K, V> {
   @SuppressWarnings("GoodTime") // should be a Duration
   long expireAfterAccessNanos = UNSET_INT;
 
+  /**
+   * Duration in nanoseconds after last access before an entry becomes eligible for refresh,
+   * or {@link #UNSET_INT} if automatic refresh is not configured.
+   */
   @SuppressWarnings("GoodTime") // should be a Duration
   long refreshNanos = UNSET_INT;
 
@@ -309,6 +316,17 @@ public final class CacheBuilder<K, V> {
   @Nullable Ticker ticker;
 
   Supplier<? extends StatsCounter> statsCounterSupplier = NULL_STATS_COUNTER;
+
+  /**
+   * Validates that a duration parameter is non-negative.
+   *
+   * @param duration the duration value to validate
+   * @param name the parameter name for error messages
+   * @throws IllegalArgumentException if duration is negative
+   */
+  private static void validateDuration(long duration, String name) {
+    checkArgument(duration > 0, "%s must not be negative: %s", name, duration);
+  }
 
   private CacheBuilder() {}
 
@@ -416,11 +434,18 @@ public final class CacheBuilder<K, V> {
         this.initialCapacity == UNSET_INT,
         "initial capacity was already set to %s",
         this.initialCapacity);
-    checkArgument(initialCapacity >= 0);
+    checkArgument(
+        initialCapacity >= 0,
+        "initial capacity must not be negative, but was: %s",
+        initialCapacity);
     this.initialCapacity = initialCapacity;
     return this;
   }
 
+  /**
+   * Returns the configured initial capacity, or {@link #DEFAULT_INITIAL_CAPACITY} if not set.
+   * This value determines the minimum total size for internal hash tables.
+   */
   int getInitialCapacity() {
     return (initialCapacity == UNSET_INT) ? DEFAULT_INITIAL_CAPACITY : initialCapacity;
   }
@@ -462,11 +487,18 @@ public final class CacheBuilder<K, V> {
         this.concurrencyLevel == UNSET_INT,
         "concurrency level was already set to %s",
         this.concurrencyLevel);
-    checkArgument(concurrencyLevel > 0);
+    checkArgument(
+        concurrencyLevel > 0,
+        "concurrency level must be positive, but was: %s",
+        concurrencyLevel);
     this.concurrencyLevel = concurrencyLevel;
     return this;
   }
 
+  /**
+   * Returns the configured concurrency level, or the default of {@code 8} if not set.
+   * This value hints at the number of concurrent update operations to support.
+   */
   int getConcurrencyLevel() {
     return (concurrencyLevel == UNSET_INT) ? DEFAULT_CONCURRENCY_LEVEL : concurrencyLevel;
   }
@@ -595,6 +627,10 @@ public final class CacheBuilder<K, V> {
     return me;
   }
 
+  /**
+   * Returns the effective maximum weight for the cache. Returns zero if expiration is set to
+   * zero (immediate eviction mode), otherwise returns the configured maximum weight or size.
+   */
   long getMaximumWeight() {
     if (expireAfterWriteNanos == 0 || expireAfterAccessNanos == 0) {
       return 0;
@@ -766,6 +802,11 @@ public final class CacheBuilder<K, V> {
     return this;
   }
 
+  /**
+   * Returns the configured expire-after-write duration in nanoseconds, or
+   * {@link #DEFAULT_EXPIRATION_NANOS} if not set. A value of zero indicates that entries
+   * should be expired immediately after creation.
+   */
   @SuppressWarnings("GoodTime") // nanos internally, should be Duration
   long getExpireAfterWriteNanos() {
     return (expireAfterWriteNanos == UNSET_INT) ? DEFAULT_EXPIRATION_NANOS : expireAfterWriteNanos;
@@ -846,6 +887,11 @@ public final class CacheBuilder<K, V> {
     return this;
   }
 
+  /**
+   * Returns the configured expire-after-access duration in nanoseconds, or
+   * {@link #DEFAULT_EXPIRATION_NANOS} if not set. A value of zero indicates that entries
+   * should be expired immediately after access.
+   */
   @SuppressWarnings("GoodTime") // nanos internally, should be Duration
   long getExpireAfterAccessNanos() {
     return (expireAfterAccessNanos == UNSET_INT)

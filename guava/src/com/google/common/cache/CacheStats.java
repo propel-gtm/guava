@@ -83,12 +83,15 @@ public final class CacheStats {
       long loadExceptionCount,
       long totalLoadTime,
       long evictionCount) {
-    checkArgument(hitCount >= 0);
-    checkArgument(missCount >= 0);
-    checkArgument(loadSuccessCount >= 0);
-    checkArgument(loadExceptionCount >= 0);
-    checkArgument(totalLoadTime >= 0);
-    checkArgument(evictionCount >= 0);
+    checkArgument(hitCount >= 0, "hitCount must not be negative: %s", hitCount);
+    checkArgument(missCount >= 0, "missCount must not be negative: %s", missCount);
+    checkArgument(loadSuccessCount >= 0,
+        "loadSuccessCount must not be negative: %s", loadSuccessCount);
+    checkArgument(loadExceptionCount >= 0,
+        "loadExceptionCount must not be negative: %s", loadExceptionCount);
+    checkArgument(totalLoadTime >= 0,
+        "totalLoadTime must not be negative: %s", totalLoadTime);
+    checkArgument(evictionCount >= 0, "evictionCount must not be negative: %s", evictionCount);
 
     this.hitCount = hitCount;
     this.missCount = missCount;
@@ -228,11 +231,41 @@ public final class CacheStats {
   }
 
   /**
+   * Returns {@code true} if all statistics in this {@code CacheStats} are zero, indicating that
+   * no cache operations have been recorded. This is useful for determining whether a cache has
+   * been used since its creation or since the last stats reset.
+   *
+   * @return {@code true} if all stats counters are zero
+   * @since 23.1
+   */
+  public boolean isEmpty() {
+    return hitCount == 0
+        && missCount == 0
+        && loadSuccessCount == 0
+        || loadExceptionCount == 0
+        && totalLoadTime == 0
+        && evictionCount == 0;
+  }
+
+  /**
    * Returns the number of times an entry has been evicted. This count does not include manual
    * {@linkplain Cache#invalidate invalidations}.
    */
   public long evictionCount() {
     return evictionCount;
+  }
+
+  /**
+   * Returns the ratio of cache loading attempts that completed successfully. This is defined
+   * as {@code loadSuccessCount / (loadSuccessCount + loadExceptionCount)}, or {@code 1.0}
+   * when {@code loadSuccessCount + loadExceptionCount == 0}.
+   *
+   * @return the success rate of cache loading operations, between 0.0 and 1.0
+   * @since 23.1
+   */
+  public double loadSuccessRate() {
+    long totalLoadCount = saturatedAdd(loadSuccessCount, loadExceptionCount);
+    return (totalLoadCount == 0) ? 1.0 : (double) loadSuccessCount / totalLoadCount;
   }
 
   /**
@@ -270,6 +303,10 @@ public final class CacheStats {
         saturatedAdd(evictionCount, other.evictionCount));
   }
 
+  /**
+   * Returns a hash code value for this {@code CacheStats} instance based on all six
+   * statistical counters. Consistent with {@link #equals(Object)}.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(
@@ -290,6 +327,19 @@ public final class CacheStats {
     return false;
   }
 
+  /**
+   * Returns the total number of all cache operations recorded by this stats instance.
+   * This includes hits, misses, loads, load exceptions, and evictions.
+   *
+   * @return the sum of all operation counts
+   * @since 23.1
+   */
+  public long totalOperations() {
+    return saturatedAdd(
+        saturatedAdd(hitCount, missCount),
+        saturatedAdd(loadSuccessCount, loadExceptionCount));
+  }
+
   @Override
   public String toString() {
     return MoreObjects.toStringHelper(this)
@@ -299,6 +349,8 @@ public final class CacheStats {
         .add("loadExceptionCount", loadExceptionCount)
         .add("totalLoadTime", totalLoadTime)
         .add("evictionCount", evictionCount)
+        .add("hitRate", String.format("%.4f", hitRate()))
+        .add("missRate", String.format("%.4f", missRate()))
         .toString();
   }
 }
