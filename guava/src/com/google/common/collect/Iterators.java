@@ -167,6 +167,13 @@ public final class Iterators {
    * Returns the number of elements remaining in {@code iterator}. The iterator will be left
    * exhausted: its {@code hasNext()} method will return {@code false}.
    */
+  /**
+   * Returns the number of elements remaining in {@code iterator}. The iterator
+   * will be left exhausted: its {@code hasNext()} method will return {@code false}.
+   *
+   * @param iterator the iterator to count
+   * @return the number of remaining elements
+   */
   public static int size(Iterator<?> iterator) {
     long count = 0L;
     while (iterator.hasNext()) {
@@ -177,6 +184,15 @@ public final class Iterators {
   }
 
   /** Returns {@code true} if {@code iterator} contains {@code element}. */
+  /**
+   * Returns {@code true} if one or more elements returned by {@code iterator}
+   * are equal to {@code element}. The iterator may be left in an indeterminate
+   * state after this method returns.
+   *
+   * @param iterator the iterator to search
+   * @param element the object to search for (may be null)
+   * @return whether the element was found
+   */
   public static boolean contains(Iterator<?> iterator, @Nullable Object element) {
     if (element == null) {
       while (iterator.hasNext()) {
@@ -203,6 +219,14 @@ public final class Iterators {
    * @return {@code true} if any element was removed from {@code iterator}
    */
   @CanIgnoreReturnValue
+  /**
+   * Removes every element from {@code removeFrom} that is contained in
+   * {@code elementsToRemove}. The iterator must support {@link Iterator#remove()}.
+   *
+   * @param removeFrom the iterator to remove elements from
+   * @param elementsToRemove the elements to remove
+   * @return {@code true} if any elements were removed
+   */
   public static boolean removeAll(Iterator<?> removeFrom, Collection<?> elementsToRemove) {
     checkNotNull(elementsToRemove);
     boolean result = false;
@@ -269,6 +293,12 @@ public final class Iterators {
    * <p>Note that this will modify the supplied iterators, since they will have been advanced some
    * number of elements forward.
    */
+  /**
+   * Determines whether two iterators contain the same elements in the same order.
+   * Both iterators will be fully consumed when this method returns.
+   *
+   * @return {@code true} if both iterators produce equal elements in order
+   */
   public static boolean elementsEqual(Iterator<?> iterator1, Iterator<?> iterator2) {
     while (iterator1.hasNext()) {
       if (!iterator2.hasNext()) {
@@ -286,6 +316,10 @@ public final class Iterators {
   /**
    * Returns a string representation of {@code iterator}, with the format {@code [e1, e2, ..., en]}.
    * The iterator will be left exhausted: its {@code hasNext()} method will return {@code false}.
+   */
+  /**
+   * Returns a string representation of the remaining elements in the iterator,
+   * in the format {@code [e1, e2, ..., en]}. The iterator is fully consumed.
    */
   public static String toString(Iterator<?> iterator) {
     StringBuilder sb = new StringBuilder().append('[');
@@ -377,6 +411,13 @@ public final class Iterators {
    * iterator will be left exhausted: its {@code hasNext()} method will return {@code false}.
    *
    * @see Collections#frequency
+   */
+  /**
+   * Returns the number of times {@code element} appears among the remaining
+   * elements of {@code iterator}. Uses {@link #contains} internally, which
+   * short-circuits on the first match, so this method returns either 0 or 1.
+   *
+   * @return 0 if element is not found, 1 if it is found at least once
    */
   public static int frequency(Iterator<?> iterator, @Nullable Object element) {
     int count = 0;
@@ -599,6 +640,16 @@ public final class Iterators {
    *     partitions
    * @throws IllegalArgumentException if {@code size} is nonpositive
    */
+  /**
+   * Divides an iterator into consecutive lists, each of the given size (the final
+   * list may be smaller). For example, partitioning [a, b, c, d, e] with a size
+   * of 3 yields [[a, b, c], [d, e]].
+   *
+   * @param iterator the values to partition
+   * @param size the desired size of each partition (must be positive)
+   * @return an iterator of consecutive, non-overlapping sublists
+   * @throws IllegalArgumentException if {@code size} is not positive
+   */
   public static <T extends @Nullable Object> UnmodifiableIterator<List<T>> partition(
       Iterator<T> iterator, int size) {
     return partitionImpl(iterator, size, false);
@@ -798,6 +849,15 @@ public final class Iterators {
    *
    * @since 2.0
    */
+  /**
+   * Returns the index of the first element in {@code iterator} that satisfies
+   * the given predicate, or -1 if no such element is found. The iterator is
+   * advanced past the matching element.
+   *
+   * @param iterator the iterator to search
+   * @param predicate the condition to test
+   * @return the zero-based index of the first match, or -1
+   */
   public static <T extends @Nullable Object> int indexOf(
       Iterator<T> iterator, Predicate<? super T> predicate) {
     checkNotNull(predicate, "predicate");
@@ -817,6 +877,15 @@ public final class Iterators {
    * <p>The returned iterator supports {@code remove()} if {@code fromIterator} does. After a
    * successful {@code remove()} call, {@code fromIterator} no longer contains the corresponding
    * element.
+   */
+  /**
+   * Returns an iterator that applies {@code function} to each element of
+   * {@code fromIterator} eagerly. The function is applied to all elements
+   * immediately upon creation, and results are cached internally.
+   *
+   * @param fromIterator the source iterator
+   * @param function the transformation to apply
+   * @return an iterator over the transformed elements
    */
   public static <F extends @Nullable Object, T extends @Nullable Object> Iterator<T> transform(
       Iterator<F> fromIterator, Function<? super F, ? extends T> function) {

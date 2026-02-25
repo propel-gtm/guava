@@ -63,11 +63,17 @@ import org.jspecify.annotations.Nullable;
 // com.google.common.base.AbstractIterator
 @GwtCompatible
 public abstract class AbstractIterator<T extends @Nullable Object> extends UnmodifiableIterator<T> {
+  /** Current state of this iterator's computation lifecycle. */
   private State state = State.NOT_READY;
 
   /** Constructor for use by subclasses. */
   protected AbstractIterator() {}
 
+  /**
+   * Internal state machine for tracking iterator progress. Transitions follow
+   * the pattern: NOT_READY -> READY (after computeNext) -> NOT_READY (after next)
+   * or NOT_READY -> DONE (after endOfData) or NOT_READY -> FAILED (on exception).
+   */
   private enum State {
     /** We have computed the next element and haven't returned it yet. */
     READY,
@@ -82,6 +88,7 @@ public abstract class AbstractIterator<T extends @Nullable Object> extends Unmod
     FAILED,
   }
 
+  /** Cached result from the most recent successful {@link #computeNext()} call. */
   private @Nullable T next;
 
   /**
@@ -136,6 +143,13 @@ public abstract class AbstractIterator<T extends @Nullable Object> extends Unmod
     return tryToComputeNext();
   }
 
+  /**
+   * Attempts to compute the next element. Sets state to FAILED before calling
+   * computeNext as a safety measure; if computeNext succeeds, state transitions
+   * to READY. If computeNext calls endOfData, state transitions to DONE.
+   *
+   * @return true if a next element was computed successfully
+   */
   private boolean tryToComputeNext() {
     state = State.FAILED; // temporary pessimism
     next = computeNext();
@@ -168,6 +182,13 @@ public abstract class AbstractIterator<T extends @Nullable Object> extends Unmod
    * implement {@code PeekingIterator}.
    */
   @ParametricNullness
+  /**
+   * Returns the next element without advancing the iterator. Subsequent calls
+   * to {@code peek()} return the same element until {@link #next()} is called.
+   *
+   * @return the next element
+   * @throws NoSuchElementException if the iteration has no more elements
+   */
   public final T peek() {
     if (!hasNext()) {
       throw new NoSuchElementException();

@@ -114,6 +114,10 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   // To avoid a self retain cycle under j2objc, we store Optional.absent() instead of
   // Optional.of(this). To access the delegate iterable, call #getDelegate(), which converts to
   // absent() back to 'this'.
+  /**
+   * Holds the delegate iterable, or {@link Optional#absent()} when the subclass
+   * overrides {@link #iterator()} directly.
+   */
   private final Optional<Iterable<E>> iterableDelegate;
 
   /** Constructor for use by subclasses. */
@@ -334,6 +338,11 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * or (less efficiently) {@code stream.collect(Collectors.toList()).toString()}.
    */
   @Override
+  /**
+   * Returns a string representation of this fluent iterable, using
+   * {@link Iterables#toString}. The format is {@code [e1, e2, ..., en]}.
+   */
+  @Override
   public String toString() {
     return Iterables.toString(getDelegate());
   }
@@ -342,6 +351,13 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * Returns the number of elements in this fluent iterable.
    *
    * <p><b>{@code Stream} equivalent:</b> {@link Stream#count}.
+   */
+  /**
+   * Returns the number of elements in this fluent iterable. This may cause
+   * the entire iterable to be traversed if the underlying collection does
+   * not provide a constant-time {@code size()} method.
+   *
+   * @return the number of elements
    */
   public final int size() {
     return Iterables.size(getDelegate());
@@ -352,6 +368,13 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * equals(target)} is true.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code stream.anyMatch(Predicate.isEqual(target))}.
+   */
+  /**
+   * Returns {@code true} if this fluent iterable contains an element equal
+   * to the specified target. Delegates to {@link Iterables#contains}.
+   *
+   * @param target the object to check for containment (may be null)
+   * @return whether the target was found
    */
   public final boolean contains(@Nullable Object target) {
     return Iterables.contains(getDelegate(), target);
@@ -373,6 +396,13 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p><b>{@code Stream} equivalent:</b> if the source iterable has only a single element {@code
    * e}, use {@code Stream.generate(() -> e)}. Otherwise, collect your stream into a collection and
    * use {@code Stream.generate(() -> collection).flatMap(Collection::stream)}.
+   */
+  /**
+   * Returns a fluent iterable that cycles through the elements a fixed number
+   * of times equal to the number of elements in the source. For example, cycling
+   * [a, b, c] returns [a, b, c, a, b, c, a, b, c] (three cycles).
+   *
+   * @return a fluent iterable that repeats elements a fixed number of times
    */
   public final FluentIterable<E> cycle() {
     return from(Iterables.cycle(getDelegate()));
@@ -438,6 +468,13 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    *
    * <p><b>{@code Stream} equivalent:</b> {@link Stream#anyMatch} (same).
    */
+  /**
+   * Returns {@code true} if at least one element satisfies the given predicate.
+   * Short-circuits as soon as a matching element is found.
+   *
+   * @param predicate the condition to test
+   * @return whether any element matches
+   */
   public final boolean anyMatch(Predicate<? super E> predicate) {
     return Iterables.any(getDelegate(), predicate);
   }
@@ -447,6 +484,13 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * fluent iterable is empty, {@code true} is returned.
    *
    * <p><b>{@code Stream} equivalent:</b> {@link Stream#allMatch} (same).
+   */
+  /**
+   * Returns {@code true} if every element satisfies the given predicate.
+   * Short-circuits as soon as a non-matching element is found.
+   *
+   * @param predicate the condition to test
+   * @return whether all elements match
    */
   public final boolean allMatch(Predicate<? super E> predicate) {
     return Iterables.all(getDelegate(), predicate);
