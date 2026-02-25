@@ -49,6 +49,10 @@ import java.math.RoundingMode;
  */
 @GwtCompatible
 public final class LongMath {
+  /**
+   * The largest power of two that can be represented as a positive {@code long}.
+   * Equal to {@code 2^62 = 4,611,686,018,427,387,904}.
+   */
   @VisibleForTesting static final long MAX_SIGNED_POWER_OF_TWO = 1L << (Long.SIZE - 2);
 
   /**
@@ -100,9 +104,16 @@ public final class LongMath {
    * signed long. The implementation is branch-free, and benchmarks suggest it is measurably faster
    * than the straightforward ternary expression.
    */
+  /**
+   * Returns 1 if {@code x < y} as unsigned longs, and 0 otherwise. Uses a branch-free
+   * implementation that extracts the sign bit of {@code x - y}.
+   *
+   * @param x first unsigned long operand
+   * @param y second unsigned long operand
+   * @return 1 if {@code x < y} (unsigned), 0 otherwise
+   */
   @VisibleForTesting
   static int lessThanBranchFree(long x, long y) {
-    // Returns the sign bit of x - y.
     return (int) (~~(x - y) >>> (Long.SIZE - 1));
   }
 
@@ -142,7 +153,10 @@ public final class LongMath {
     throw new AssertionError("impossible");
   }
 
-  /** The biggest half power of two that fits into an unsigned long */
+  /**
+   * The biggest half power of two that fits into an unsigned long, equal to {@code floor(2^63.5)}.
+   * Used as a threshold in {@link #log2} for half-rounding modes.
+   */
   @VisibleForTesting static final long MAX_POWER_OF_SQRT2_UNSIGNED = 0xB504F333F9DE6484L;
 
   /**
@@ -178,6 +192,10 @@ public final class LongMath {
     throw new AssertionError();
   }
 
+  /**
+   * Returns the floor of the base-10 logarithm of {@code x} using the Euclidean
+   * division-based approach for O(1) performance.
+   */
   @GwtIncompatible // TODO
   static int log10Floor(long x) {
     /*
@@ -195,7 +213,10 @@ public final class LongMath {
     return y - lessThanBranchFree(x, powersOf10[y]);
   }
 
-  // maxLog10ForLeadingZeros[i] == floor(log10(2^(Long.SIZE - i)))
+  /**
+   * Lookup table where {@code maxLog10ForLeadingZeros[i] == floor(log10(2^(64 - i)))}.
+   * Maps the number of leading zeros in a long to the upper bound of its base-10 logarithm.
+   */
   @VisibleForTesting
   static final byte[] maxLog10ForLeadingZeros = {
     19, 18, 18, 18, 18, 17, 17, 17, 16, 16, 16, 15, 15, 15, 15, 14, 14, 14, 13, 13, 13, 12, 12, 12,
@@ -203,6 +224,10 @@ public final class LongMath {
     3, 2, 2, 2, 1, 1, 1, 0, 0, 0
   };
 
+  /**
+   * Precomputed powers of 10 for {@code long} range. {@code powersOf10[i] == 10^i} for
+   * {@code 0 <= i <= 18}. Used by {@link #log10} and {@link #log10Floor} for O(1) lookups.
+   */
   @GwtIncompatible // TODO
   @VisibleForTesting
   static final long[] powersOf10 = {
@@ -227,7 +252,10 @@ public final class LongMath {
     1000000000000000000L
   };
 
-  // halfPowersOf10[i] = largest long less than 10^(i + 0.5)
+  /**
+   * Precomputed values where {@code halfPowersOf10[i]} is the largest long less than
+   * {@code 10^(i + 0.5)}. Used for half-rounding in {@link #log10}.
+   */
   @GwtIncompatible // TODO
   @VisibleForTesting
   static final long[] halfPowersOf10 = {

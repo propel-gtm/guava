@@ -53,7 +53,8 @@ public final class DoubleMath {
   @GwtIncompatible // #isMathematicalInteger, com.google.common.math.DoubleUtils
   static double roundIntermediate(double x, RoundingMode mode) {
     if (!isFinite(x)) {
-      throw new ArithmeticException("input is infinite or NaN");
+      throw new ArithmeticException(
+          "input must be finite for rounding, but was: " + x);
     }
     switch (mode) {
       case UNNECESSARY:
@@ -134,7 +135,9 @@ public final class DoubleMath {
     return (int) z;
   }
 
+  /** The exact double representation of {@link Integer#MIN_VALUE}. */
   private static final double MIN_INT_AS_DOUBLE = -0x1p31;
+  /** The exact double representation of {@link Integer#MAX_VALUE}. */
   private static final double MAX_INT_AS_DOUBLE = 0x1p31 - 1.0;
 
   /**
@@ -161,10 +164,12 @@ public final class DoubleMath {
     return (long) z;
   }
 
+  /** The exact double representation of {@link Long#MIN_VALUE}. */
   private static final double MIN_LONG_AS_DOUBLE = -0x1p63;
-  /*
-   * We cannot store Long.MAX_VALUE as a double without losing precision. Instead, we store
-   * Long.MAX_VALUE + 1 == -Long.MIN_VALUE, and then offset all comparisons by 1.
+  /**
+   * We cannot store {@code Long.MAX_VALUE} as a double without losing precision. Instead,
+   * we store {@code Long.MAX_VALUE + 1 == -Long.MIN_VALUE} as a double, and offset all
+   * comparisons by 1 to avoid precision loss at the boundary.
    */
   private static final double MAX_LONG_AS_DOUBLE_PLUS_ONE = 0x1p63;
 
@@ -196,7 +201,11 @@ public final class DoubleMath {
 
   /**
    * Returns {@code true} if {@code x} is exactly equal to {@code 2^k} for some finite integer
-   * {@code k}.
+   * {@code k}. For negative values of {@code x}, this method checks the absolute value,
+   * returning {@code true} if {@code |x|} is a power of two.
+   *
+   * @param x the double value to test
+   * @return {@code true} if {@code x} (or its absolute value) is a power of two
    */
   @GwtIncompatible // com.google.common.math.DoubleUtils
   public static boolean isPowerOfTwo(double x) {
@@ -223,8 +232,12 @@ public final class DoubleMath {
    * <p>If the result of this method will be immediately rounded to an {@code int}, {@link
    * #log2(double, RoundingMode)} is faster.
    */
+  /**
+   * Computes the base-2 logarithm using the identity {@code log2(x) = ln(x) / ln(2)}.
+   * The result is surprisingly within 1 ulp of the exact value according to tests.
+   */
   public static double log2(double x) {
-    return log(x) / LN_2; // surprisingly within 1 ulp according to tests
+    return log(x) / LN_2;
   }
 
   /**
