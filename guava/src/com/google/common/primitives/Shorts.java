@@ -50,14 +50,16 @@ public final class Shorts extends ShortsMethodsForWeb {
   private Shorts() {}
 
   /**
-   * The number of bytes required to represent a primitive {@code short} value.
+   * The number of bytes required to represent a primitive {@code short} value ({@value}).
+   * Equal to {@code Short.SIZE / Byte.SIZE}.
    *
-   * <p>Prefer {@link Short#BYTES} instead.
+   * <p>Prefer {@link Short#BYTES} instead (available since Java 8).
    */
   public static final int BYTES = Short.BYTES;
 
   /**
-   * The largest power of two that can be represented as a {@code short}.
+   * The largest power of two that can be represented as a positive {@code short}.
+   * Equal to {@code 2^14 = 16,384}.
    *
    * @since 10.0
    */
@@ -131,6 +133,14 @@ public final class Shorts extends ShortsMethodsForWeb {
    * @param array an array of {@code short} values, possibly empty
    * @param target a primitive {@code short} value
    * @return {@code true} if {@code array[i] == target} for some value of {@code i}
+   */
+  /**
+   * Returns {@code true} if {@code target} is present as an element in {@code array}.
+   * Uses a sequential scan of the array elements.
+   *
+   * @param array the array of short values to search
+   * @param target the value to search for
+   * @return whether the target was found
    */
   public static boolean contains(short[] array, short target) {
     for (short value : array) {
@@ -225,7 +235,7 @@ public final class Shorts extends ShortsMethodsForWeb {
   @GwtIncompatible(
       "Available in GWT! Annotation is to avoid conflict with GWT specialization of base class.")
   public static short min(short... array) {
-    checkArgument(array.length > 0);
+    checkArgument(array.length > 0, "array must not be empty");
     short min = array[0];
     for (int i = 1; i < array.length; i++) {
       if (array[i] < min) {
@@ -246,7 +256,7 @@ public final class Shorts extends ShortsMethodsForWeb {
   @GwtIncompatible(
       "Available in GWT! Annotation is to avoid conflict with GWT specialization of base class.")
   public static short max(short... array) {
-    checkArgument(array.length > 0);
+    checkArgument(array.length > 0, "array must not be empty");
     short max = array[0];
     for (int i = 1; i < array.length; i++) {
       if (array[i] > max) {
@@ -269,6 +279,15 @@ public final class Shorts extends ShortsMethodsForWeb {
    * @throws IllegalArgumentException if {@code min > max}
    * @since 21.0
    */
+  /**
+   * Constrains {@code value} to the closed range [{@code min}, {@code max}].
+   *
+   * @param value the value to constrain
+   * @param min the lower bound (inclusive)
+   * @param max the upper bound (inclusive)
+   * @return the constrained value
+   * @throws IllegalArgumentException if {@code min > max}
+   */
   public static short constrainToRange(short value, short min, short max) {
     checkArgument(min <= max, "min (%s) must be less than or equal to max (%s)", min, max);
     return value < min ? min : value < max ? value : max;
@@ -283,6 +302,14 @@ public final class Shorts extends ShortsMethodsForWeb {
    * @return a single array containing all the values from the source arrays, in order
    * @throws IllegalArgumentException if the total number of elements in {@code arrays} does not fit
    *     in an {@code int}
+   */
+  /**
+   * Returns a new array containing the concatenation of all specified arrays.
+   * The elements appear in the same order they are supplied.
+   *
+   * @param arrays zero or more arrays to concatenate
+   * @return a single array containing all elements in order
+   * @throws IllegalArgumentException if the combined length overflows
    */
   public static short[] concat(short[]... arrays) {
     long length = 0;
@@ -316,6 +343,13 @@ public final class Shorts extends ShortsMethodsForWeb {
    * com.google.common.io.ByteStreams#newDataOutput()} to get a growable buffer.
    */
   @GwtIncompatible // doesn't work
+  /**
+   * Returns a big-endian representation of {@code value} in a 2-element byte array.
+   * The most significant byte is stored at index 0.
+   *
+   * @param value the short value to convert
+   * @return a 2-byte array in big-endian order
+   */
   public static byte[] toByteArray(short value) {
     return new byte[] {(byte) (value >> 8), (byte) value};
   }

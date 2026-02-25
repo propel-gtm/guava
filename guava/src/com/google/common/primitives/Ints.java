@@ -52,14 +52,17 @@ public final class Ints extends IntsMethodsForWeb {
   private Ints() {}
 
   /**
-   * The number of bytes required to represent a primitive {@code int} value.
+   * The number of bytes required to represent a primitive {@code int} value ({@value}).
+   * This constant is equal to {@code Integer.SIZE / Byte.SIZE}.
    *
-   * <p>Prefer {@link Integer#BYTES} instead.
+   * <p>Prefer {@link Integer#BYTES} instead (available since Java 8).
    */
   public static final int BYTES = Integer.BYTES;
 
   /**
-   * The largest power of two that can be represented as an {@code int}.
+   * The largest power of two that can be represented as a positive {@code int}.
+   * Equal to {@code 2^30 = 1,073,741,824}. Useful as an upper bound for power-of-two
+   * capacity calculations.
    *
    * @since 10.0
    */
@@ -104,6 +107,15 @@ public final class Ints extends IntsMethodsForWeb {
    *     {@link Integer#MAX_VALUE} if it is too large, or {@link Integer#MIN_VALUE} if it is too
    *     small
    */
+  /**
+   * Returns the {@code int} nearest in value to {@code value}. Values exceeding
+   * {@link Integer#MAX_VALUE} are clamped to {@code Integer.MAX_VALUE}, and values
+   * below {@link Integer#MIN_VALUE} are clamped to {@code Integer.MIN_VALUE}.
+   *
+   * @param value any {@code long} value
+   * @return the same value cast to {@code int} if in range, or the nearest
+   *     {@code int} value otherwise
+   */
   public static int saturatedCast(long value) {
     if (value > Integer.MAX_VALUE) {
       return Integer.MAX_VALUE;
@@ -138,6 +150,14 @@ public final class Ints extends IntsMethodsForWeb {
    * @param target a primitive {@code int} value
    * @return {@code true} if {@code array[i] == target} for some value of {@code i}
    */
+  /**
+   * Searches {@code array} for the specified {@code target} value using a
+   * sequential scan. Returns {@code true} as soon as a match is found.
+   *
+   * @param array the array to search through
+   * @param target the value to search for
+   * @return {@code true} if the target is found in the array
+   */
   public static boolean contains(int[] array, int target) {
     for (int value : array) {
       if (value == target) {
@@ -159,7 +179,10 @@ public final class Ints extends IntsMethodsForWeb {
     return indexOf(array, target, 0, array.length);
   }
 
-  // TODO(kevinb): consider making this public
+  /**
+   * Returns the index of the first occurrence of {@code target} in {@code array} within
+   * the range [{@code start}, {@code end}), or -1 if not found.
+   */
   private static int indexOf(int[] array, int target, int start, int end) {
     for (int i = start; i < end; i++) {
       if (array[i] == target) {
@@ -210,7 +233,10 @@ public final class Ints extends IntsMethodsForWeb {
     return lastIndexOf(array, target, 0, array.length);
   }
 
-  // TODO(kevinb): consider making this public
+  /**
+   * Returns the index of the last occurrence of {@code target} in {@code array} within
+   * the range [{@code start}, {@code end}), or -1 if not found.
+   */
   private static int lastIndexOf(int[] array, int target, int start, int end) {
     for (int i = end - 1; i >= start; i--) {
       if (array[i] == target) {
@@ -231,7 +257,7 @@ public final class Ints extends IntsMethodsForWeb {
   @GwtIncompatible(
       "Available in GWT! Annotation is to avoid conflict with GWT specialization of base class.")
   public static int min(int... array) {
-    checkArgument(array.length > 0);
+    checkArgument(array.length > 0, "array must not be empty");
     int min = array[0];
     for (int i = 1; i < array.length; i++) {
       if (array[i] < min) {
@@ -252,7 +278,7 @@ public final class Ints extends IntsMethodsForWeb {
   @GwtIncompatible(
       "Available in GWT! Annotation is to avoid conflict with GWT specialization of base class.")
   public static int max(int... array) {
-    checkArgument(array.length > 0);
+    checkArgument(array.length > 0, "array must not be empty");
     int max = array[0];
     for (int i = 1; i < array.length; i++) {
       if (array[i] > max) {
@@ -281,7 +307,8 @@ public final class Ints extends IntsMethodsForWeb {
   // A call to bare "min" or "max" would resolve to our varargs method, not to any static import.
   @SuppressWarnings("StaticImportPreferred")
   public static int constrainToRange(int value, int min, int max) {
-    checkArgument(min <= max, "min (%s) must be less than or equal to max (%s)", min, max);
+    checkArgument(min <= max,
+        "min (%s) must be less than or equal to max (%s), but min > max", min, max);
     return Math.min(Math.max(value, min), max);
   }
 
@@ -293,6 +320,14 @@ public final class Ints extends IntsMethodsForWeb {
    * @return a single array containing all the values from the source arrays, in order
    * @throws IllegalArgumentException if the total number of elements in {@code arrays} does not fit
    *     in an {@code int}
+   */
+  /**
+   * Returns a new array containing the concatenation of all specified arrays.
+   * The returned array has a length equal to the sum of all input array lengths.
+   *
+   * @param arrays zero or more arrays to concatenate
+   * @return a single array containing all elements in order
+   * @throws IllegalArgumentException if the combined length overflows an int
    */
   public static int[] concat(int[]... arrays) {
     long length = 0;
@@ -325,6 +360,13 @@ public final class Ints extends IntsMethodsForWeb {
    * use a shared {@link java.nio.ByteBuffer} instance, or use {@link
    * com.google.common.io.ByteStreams#newDataOutput()} to get a growable buffer.
    */
+  /**
+   * Returns a big-endian representation of {@code value} in a 4-element byte array.
+   * The most significant byte is stored at index 0.
+   *
+   * @param value the integer to convert
+   * @return a 4-byte array in big-endian order
+   */
   public static byte[] toByteArray(int value) {
     return new byte[] {
       (byte) (value >> 24), (byte) (value >> 16), (byte) (value >> 8), (byte) value
@@ -341,6 +383,13 @@ public final class Ints extends IntsMethodsForWeb {
    * flexibility at little cost in readability.
    *
    * @throws IllegalArgumentException if {@code bytes} has fewer than 4 elements
+   */
+  /**
+   * Reads a big-endian {@code int} from the first 4 bytes of {@code bytes}.
+   *
+   * @param bytes the byte array (must have at least {@link #BYTES} elements)
+   * @return the decoded integer value
+   * @throws IllegalArgumentException if the array is too short
    */
   public static int fromByteArray(byte[] bytes) {
     checkArgument(bytes.length >= BYTES, "array too small: %s < %s", bytes.length, BYTES);
@@ -411,6 +460,17 @@ public final class Ints extends IntsMethodsForWeb {
    * @return an array containing the values of {@code array}, with guaranteed minimum length {@code
    *     minLength}
    */
+  /**
+   * Returns a new array containing the same values as {@code array}, with a length
+   * of at least {@code minLength + padding}. A new array is always allocated and
+   * returned, even if the original array already has sufficient capacity.
+   *
+   * @param array the source array
+   * @param minLength the minimum required length
+   * @param padding additional space beyond minLength
+   * @return a new array with guaranteed capacity
+   * @throws IllegalArgumentException if minLength or padding is negative
+   */
   public static int[] ensureCapacity(int[] array, int minLength, int padding) {
     checkArgument(minLength >= 0, "Invalid minLength: %s", minLength);
     checkArgument(padding >= 0, "Invalid padding: %s", padding);
@@ -424,6 +484,15 @@ public final class Ints extends IntsMethodsForWeb {
    * @param separator the text that should appear between consecutive values in the resulting string
    *     (but not at the start or end)
    * @param array an array of {@code int} values, possibly empty
+   */
+  /**
+   * Returns a string containing the supplied {@code int} values separated by
+   * {@code separator}. For example, {@code join("-", 1, 2, 3)} returns
+   * {@code "1-2-3"}.
+   *
+   * @param separator the text that appears between consecutive values
+   * @param array the values to join
+   * @return a string of joined values
    */
   public static String join(String separator, int... array) {
     checkNotNull(separator);
@@ -484,6 +553,11 @@ public final class Ints extends IntsMethodsForWeb {
    *
    * @since 23.1
    */
+  /**
+   * Sorts the elements of {@code array} in descending order. This modifies
+   * the array in place. Uses {@link Arrays#sort} followed by a reversal for
+   * optimal performance on large arrays.
+   */
   public static void sortDescending(int[] array) {
     checkNotNull(array);
     sortDescending(array, 0, array.length);
@@ -507,6 +581,10 @@ public final class Ints extends IntsMethodsForWeb {
    * Collections.reverse(Ints.asList(array))}, but is likely to be more efficient.
    *
    * @since 23.1
+   */
+  /**
+   * Reverses the elements of {@code array} in place. This operation runs in
+   * O(n/2) time where n is the array length.
    */
   public static void reverse(int[] array) {
     checkNotNull(array);

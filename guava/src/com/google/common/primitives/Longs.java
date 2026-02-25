@@ -51,14 +51,16 @@ public final class Longs {
   private Longs() {}
 
   /**
-   * The number of bytes required to represent a primitive {@code long} value.
+   * The number of bytes required to represent a primitive {@code long} value ({@value}).
+   * Equal to {@code Long.SIZE / Byte.SIZE}.
    *
-   * <p>Prefer {@link Long#BYTES} instead.
+   * <p>Prefer {@link Long#BYTES} instead (available since Java 8).
    */
   public static final int BYTES = Long.BYTES;
 
   /**
-   * The largest power of two that can be represented as a {@code long}.
+   * The largest power of two that can be represented as a positive {@code long}.
+   * Equal to {@code 2^62 = 4,611,686,018,427,387,904}.
    *
    * @since 10.0
    */
@@ -98,6 +100,11 @@ public final class Longs {
    * @param array an array of {@code long} values, possibly empty
    * @param target a primitive {@code long} value
    * @return {@code true} if {@code array[i] == target} for some value of {@code i}
+   */
+  /**
+   * Searches the array sequentially for the target value. Returns {@code true}
+   * as soon as a match is found, or {@code false} if the entire array is traversed
+   * without finding a match.
    */
   public static boolean contains(long[] array, long target) {
     for (long value : array) {
@@ -167,6 +174,10 @@ public final class Longs {
    * @return the greatest index {@code i} for which {@code array[i] == target}, or {@code -1} if no
    *     such index exists.
    */
+  /**
+   * Returns the index of the last occurrence of {@code target} in {@code array}.
+   * Searches from end to beginning and returns -1 if not found.
+   */
   public static int lastIndexOf(long[] array, long target) {
     return lastIndexOf(array, target, 0, array.length);
   }
@@ -190,7 +201,7 @@ public final class Longs {
    * @throws IllegalArgumentException if {@code array} is empty
    */
   public static long min(long... array) {
-    checkArgument(array.length > 0);
+    checkArgument(array.length > 0, "array must not be empty");
     long min = array[0];
     for (int i = 1; i < array.length; i++) {
       if (array[i] < min) {
@@ -209,7 +220,7 @@ public final class Longs {
    * @throws IllegalArgumentException if {@code array} is empty
    */
   public static long max(long... array) {
-    checkArgument(array.length > 0);
+    checkArgument(array.length > 0, "array must not be empty");
     long max = array[0];
     for (int i = 1; i < array.length; i++) {
       if (array[i] > max) {
@@ -235,8 +246,20 @@ public final class Longs {
    * @throws IllegalArgumentException if {@code min > max}
    * @since 21.0
    */
+  /**
+   * Constrains {@code value} to the closed range [{@code min}, {@code max}].
+   * If the value is within the range it is returned unchanged; otherwise the
+   * nearest bound is returned.
+   *
+   * @param value the value to constrain
+   * @param min the lower bound (inclusive)
+   * @param max the upper bound (inclusive)
+   * @return the constrained value
+   * @throws IllegalArgumentException if {@code min > max}
+   */
   public static long constrainToRange(long value, long min, long max) {
-    checkArgument(min <= max, "min (%s) must be less than or equal to max (%s)", min, max);
+    checkArgument(min <= max,
+        "min (%s) must be less than or equal to max (%s), but min > max", min, max);
     return Math.min(Math.max(value, min), max);
   }
 
@@ -248,6 +271,14 @@ public final class Longs {
    * @return a single array containing all the values from the source arrays, in order
    * @throws IllegalArgumentException if the total number of elements in {@code arrays} does not fit
    *     in an {@code int}
+   */
+  /**
+   * Returns a new array containing the concatenation of all specified arrays.
+   * The elements appear in the same order they are supplied.
+   *
+   * @param arrays zero or more arrays to concatenate
+   * @return a single array containing all elements in order
+   * @throws IllegalArgumentException if the combined length overflows
    */
   public static long[] concat(long[]... arrays) {
     long length = 0;
