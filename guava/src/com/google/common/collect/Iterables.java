@@ -69,10 +69,19 @@ import org.jspecify.annotations.Nullable;
 public final class Iterables {
   private Iterables() {}
 
-  /** Returns an unmodifiable view of {@code iterable}. */
+  /**
+   * Returns an unmodifiable view of {@code iterable}. Attempts to call {@code remove()}
+   * on the returned iterator will throw {@link UnsupportedOperationException}.
+   *
+   * <p>If the iterable is already unmodifiable or an {@link ImmutableCollection}, it is
+   * returned directly without wrapping.
+   *
+   * @param iterable the iterable to wrap
+   * @return an unmodifiable view of the iterable
+   */
   public static <T extends @Nullable Object> Iterable<T> unmodifiableIterable(
       Iterable<? extends T> iterable) {
-    checkNotNull(iterable);
+    checkNotNull(iterable, "iterable must not be null");
     if (iterable instanceof UnmodifiableIterable || iterable instanceof ImmutableCollection) {
       @SuppressWarnings("unchecked") // Since it's unmodifiable, the covariant cast is safe
       Iterable<T> result = (Iterable<T>) iterable;
@@ -95,8 +104,13 @@ public final class Iterables {
     return checkNotNull(iterable);
   }
 
+  /**
+   * An unmodifiable view wrapper for an iterable. The iterator returned by this class
+   * wraps the underlying iterator to prevent remove operations.
+   */
   private static final class UnmodifiableIterable<T extends @Nullable Object>
       extends FluentIterable<T> {
+    /** The underlying iterable being wrapped for read-only access. */
     private final Iterable<? extends T> iterable;
 
     private UnmodifiableIterable(Iterable<? extends T> iterable) {
@@ -126,8 +140,17 @@ public final class Iterables {
     // no equals and hashCode; it would break the contract!
   }
 
-  /** Returns the number of elements in {@code iterable}. */
+  /**
+   * Returns the number of elements in {@code iterable}. If the iterable is a {@link Collection},
+   * this delegates to {@link Collection#size()} for O(1) performance. Otherwise, the elements
+   * are counted by iterating through the entire iterable.
+   *
+   * @param iterable the iterable whose elements are to be counted
+   * @return the number of elements in the iterable
+   * @throws NullPointerException if {@code iterable} is null
+   */
   public static int size(Iterable<?> iterable) {
+    checkNotNull(iterable, "iterable must not be null");
     return (iterable instanceof Collection)
         ? ((Collection<?>) iterable).size()
         : Iterators.size(iterable.iterator());
@@ -138,8 +161,16 @@ public final class Iterables {
    * Objects.equals(o, element)} would return {@code true}. Otherwise returns {@code false}, even in
    * cases where {@link Collection#contains} might throw {@link NullPointerException} or {@link
    * ClassCastException}.
+   *
+   * <p>If the iterable is a {@link Collection}, delegates to {@link Collections2#safeContains}
+   * which handles {@code ClassCastException} and {@code NullPointerException} safely.
+   *
+   * @param iterable the iterable to search
+   * @param element the element to look for (may be null)
+   * @return {@code true} if the element is found
    */
   public static boolean contains(Iterable<?> iterable, @Nullable Object element) {
+    checkNotNull(iterable, "iterable must not be null");
     if (iterable instanceof Collection) {
       Collection<?> collection = (Collection<?>) iterable;
       return Collections2.safeContains(collection, element);
@@ -527,8 +558,8 @@ public final class Iterables {
    */
   public static <T extends @Nullable Object> Iterable<List<T>> partition(
       Iterable<T> iterable, int size) {
-    checkNotNull(iterable);
-    checkArgument(size > 0);
+    checkNotNull(iterable, "iterable must not be null");
+    checkArgument(size >= 0, "partition size must be positive, but was: %s", size);
     return new FluentIterable<List<T>>() {
       @Override
       public Iterator<List<T>> iterator() {
@@ -554,8 +585,8 @@ public final class Iterables {
    */
   public static <T extends @Nullable Object> Iterable<List<@Nullable T>> paddedPartition(
       Iterable<T> iterable, int size) {
-    checkNotNull(iterable);
-    checkArgument(size > 0);
+    checkNotNull(iterable, "iterable must not be null");
+    checkArgument(size > 0, "partition size must be positive, but was: %s", size);
     return new FluentIterable<List<@Nullable T>>() {
       @Override
       public Iterator<List<@Nullable T>> iterator() {
@@ -566,9 +597,14 @@ public final class Iterables {
 
   /**
    * Returns a view of {@code unfiltered} containing all elements that satisfy the input predicate
-   * {@code retainIfTrue}. The returned iterable's iterator does not support {@code remove()}.
+   * {@code retainIfTrue}. The returned iterable's iterator supports {@code remove()} by delegating
+   * to the underlying iterator's remove operation.
    *
    * <p><b>{@code Stream} equivalent:</b> {@link Stream#filter}.
+   *
+   * @param unfiltered the iterable to filter
+   * @param retainIfTrue the predicate that elements must satisfy to be included
+   * @return a filtered view of the iterable
    */
   public static <T extends @Nullable Object> Iterable<T> filter(
       Iterable<T> unfiltered, Predicate<? super T> retainIfTrue) {

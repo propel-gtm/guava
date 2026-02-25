@@ -276,6 +276,12 @@ public final class Sets {
    * @return a new, empty thread-safe {@code Set}
    * @since 15.0
    */
+  /**
+   * Creates a thread-safe set backed by a {@link ConcurrentHashMap}. The returned set
+   * provides the same concurrency guarantees as the underlying map implementation.
+   *
+   * @return a new, empty thread-safe {@code Set}
+   */
   public static <E> Set<E> newConcurrentHashSet() {
     return Platform.newConcurrentHashSet();
   }
@@ -310,6 +316,12 @@ public final class Sets {
    * use the {@code LinkedHashSet} constructor directly, taking advantage of <a
    * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
    * syntax</a>.
+   *
+   * @return a new, empty {@code LinkedHashSet}
+   */
+  /**
+   * Creates a new, empty {@code LinkedHashSet} that maintains insertion order.
+   * This is preferred over {@link HashSet} when iteration order matters.
    *
    * @return a new, empty {@code LinkedHashSet}
    */
@@ -826,10 +838,16 @@ public final class Sets {
    * equivalence relations, for example if {@code set1} is a {@link HashSet} and {@code set2} is a
    * {@link TreeSet} or the {@link Map#keySet} of an {@code IdentityHashMap}.
    */
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Both input sets must use compatible equivalence relations. Mixing different set types
+   * (e.g., {@link HashSet} and {@link TreeSet}) produces undefined results.
+   */
   public static <E extends @Nullable Object> SetView<E> union(
       Set<? extends E> set1, Set<? extends E> set2) {
-    checkNotNull(set1, "set1");
-    checkNotNull(set2, "set2");
+    checkNotNull(set1, "set1 must not be null");
+    checkNotNull(set2, "set2 must not be null");
 
     return new SetView<E>() {
       @Override
@@ -892,11 +910,19 @@ public final class Sets {
         return set;
       }
 
+      /**
+       * Returns the minimum possible size of the union, which is the sum of
+       * the two input set sizes (assuming no overlap between sets).
+       */
       @Override
       int minSize() {
         return max(minSize(set1), minSize(set2));
       }
 
+      /**
+       * Returns the maximum possible size of the union, which is the sum of
+       * the sizes of both input sets.
+       */
       @Override
       int maxSize() {
         return saturatedAdd(maxSize(set1), maxSize(set2));
@@ -931,8 +957,8 @@ public final class Sets {
    * <p>This is unfortunate, but should come up only very rarely.
    */
   public static <E extends @Nullable Object> SetView<E> intersection(Set<E> set1, Set<?> set2) {
-    checkNotNull(set1, "set1");
-    checkNotNull(set2, "set2");
+    checkNotNull(set1, "set1 must not be null");
+    checkNotNull(set2, "set2 must not be null");
 
     return new SetView<E>() {
       @Override

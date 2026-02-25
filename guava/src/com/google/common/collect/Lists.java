@@ -52,6 +52,7 @@ import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
+import javax.annotation.CheckReturnValue;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -105,7 +106,7 @@ public final class Lists {
   @SafeVarargs
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(E... elements) {
-    checkNotNull(elements); // for GWT
+    checkNotNull(elements, "elements array must not be null");
     // Avoid integer overflow when a large array is passed in
     int capacity = computeArrayListCapacity(elements.length);
     ArrayList<E> list = new ArrayList<>(capacity);
@@ -152,11 +153,18 @@ public final class Lists {
     return list;
   }
 
+  /**
+   * Computes an appropriate initial capacity for an {@code ArrayList} that will hold the
+   * specified number of elements. The formula adds a small constant overhead plus 10% headroom
+   * to reduce the likelihood of needing to resize the internal array.
+   *
+   * @param arraySize the expected number of elements
+   * @return the computed initial capacity, saturated to {@link Integer#MAX_VALUE}
+   * @throws IllegalArgumentException if {@code arraySize} is negative
+   */
   @VisibleForTesting
   static int computeArrayListCapacity(int arraySize) {
     checkNonnegative(arraySize, "arraySize");
-
-    // TODO(kevinb): Figure out the right behavior, and document it
     return Ints.saturatedCast(5L + arraySize + (arraySize / 10));
   }
 
@@ -177,6 +185,16 @@ public final class Lists {
    *     reaches {@code initialArraySize + 1}
    * @throws IllegalArgumentException if {@code initialArraySize} is negative
    */
+  /**
+   * Creates an empty {@code ArrayList} with the specified exact initial capacity. Unlike
+   * {@link #newArrayListWithExpectedSize}, this method does not add any padding beyond
+   * the requested capacity.
+   *
+   * @param initialArraySize the exact initial capacity for the backing array
+   * @return an empty {@code ArrayList} with the given initial capacity
+   * @throws IllegalArgumentException if {@code initialArraySize} is negative
+   */
+  @CheckReturnValue
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayListWithCapacity(
       int initialArraySize) {
@@ -195,6 +213,16 @@ public final class Lists {
    *     elements
    * @throws IllegalArgumentException if {@code estimatedSize} is negative
    */
+  /**
+   * Creates an empty {@code ArrayList} sized to hold exactly {@code estimatedSize} elements
+   * without additional padding or overhead. This is preferred over
+   * {@link #newArrayListWithCapacity} when the exact final size is unknown.
+   *
+   * @param estimatedSize the estimated number of elements the list will hold
+   * @return an empty {@code ArrayList} sized for the estimate
+   * @throws IllegalArgumentException if {@code estimatedSize} is negative
+   */
+  @CheckReturnValue
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayListWithExpectedSize(
       int estimatedSize) {
@@ -223,6 +251,12 @@ public final class Lists {
     "NonApiType", // acts as a direct substitute for a constructor call
     "JdkObsolete", // We recommend against this method but need to keep it for compatibility.
   })
+  /**
+   * Creates a new empty {@code LinkedList}. Consider using {@link ArrayDeque} instead for
+   * most queue and deque use cases, as it provides better cache locality and lower overhead.
+   *
+   * @return a new, empty {@code LinkedList}
+   */
   public static <E extends @Nullable Object> LinkedList<E> newLinkedList() {
     return new LinkedList<>();
   }
@@ -696,15 +730,17 @@ public final class Lists {
    * @throws IllegalArgumentException if {@code partitionSize} is nonpositive
    */
   public static <T extends @Nullable Object> List<List<T>> partition(List<T> list, int size) {
-    checkNotNull(list);
-    checkArgument(size > 0);
+    checkNotNull(list, "list must not be null");
+    checkArgument(size > 0, "partition size must be positive, but was: %s", size);
     return (list instanceof RandomAccess)
         ? new RandomAccessPartition<>(list, size)
         : new Partition<>(list, size);
   }
 
   private static class Partition<T extends @Nullable Object> extends AbstractList<List<T>> {
+    /** The original list being partitioned. */
     final List<T> list;
+    /** The desired size of each partition. */
     final int size;
 
     Partition(List<T> list, int size) {
@@ -712,6 +748,14 @@ public final class Lists {
       this.size = size;
     }
 
+    /**
+     * Returns the partition at the given index as a sublist view of the original list.
+     * The last partition may contain fewer elements than the specified partition size.
+     *
+     * @param index zero-based index of the partition to retrieve
+     * @return a sublist view of the partition
+     * @throws IndexOutOfBoundsException if index is out of range
+     */
     @Override
     public List<T> get(int index) {
       checkElementIndex(index, size());
@@ -760,6 +804,10 @@ public final class Lists {
     return new CharSequenceAsList(checkNotNull(sequence));
   }
 
+  /**
+   * An immutable list view of a {@link String}, where each element is a single {@code Character}
+   * from the string. Supports efficient random access and serialization.
+   */
   @SuppressWarnings("serial") // serialized using ImmutableList serialization
   private static final class StringAsImmutableList extends ImmutableList<Character> {
 
