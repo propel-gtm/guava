@@ -97,6 +97,11 @@ import org.jspecify.annotations.Nullable;
 public final class Maps {
   private Maps() {}
 
+  /**
+   * Returns an iterator that extracts the key from each map entry. The returned iterator
+   * delegates to the underlying entry iterator and does not support {@code remove()} unless
+   * the entry iterator does.
+   */
   static <K extends @Nullable Object, V extends @Nullable Object> Iterator<K> keyIterator(
       Iterator<Entry<K, V>> entryIterator) {
     return new TransformedIterator<Entry<K, V>, K>(entryIterator) {
@@ -108,6 +113,10 @@ public final class Maps {
     };
   }
 
+  /**
+   * Returns an iterator that extracts the value from each map entry. The returned iterator
+   * delegates to the underlying entry iterator for all operations.
+   */
   static <K extends @Nullable Object, V extends @Nullable Object> Iterator<V> valueIterator(
       Iterator<Entry<K, V>> entryIterator) {
     return new TransformedIterator<Entry<K, V>, V>(entryIterator) {
@@ -211,6 +220,12 @@ public final class Maps {
    *
    * @return a new, empty {@code HashMap}
    */
+  /**
+   * Creates a mutable, empty {@code HashMap}. Consider using {@link ImmutableMap#of()}
+   * if mutability is not required, or {@link #newEnumMap} if the key type is an enum.
+   *
+   * @return a new, empty {@code HashMap}
+   */
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <K extends @Nullable Object, V extends @Nullable Object>
       HashMap<K, V> newHashMap() {
@@ -256,8 +271,14 @@ public final class Maps {
   }
 
   /**
-   * Returns a capacity that is sufficient to keep the map from being resized as long as it grows no
-   * larger than expectedSize and the load factor is ≥ its default (0.75).
+   * Returns a capacity that is sufficient to keep the map from being resized as long as it grows
+   * no larger than {@code expectedSize} and the load factor is ≥ its default ({@code 0.8}).
+   * This calculation ensures that {@code ceilingPowerOfTwo(capacity * loadFactor) >=
+   * expectedSize}.
+   *
+   * @param expectedSize the expected number of entries
+   * @return the initial capacity to use for the hash map
+   * @throws IllegalArgumentException if {@code expectedSize} is negative
    */
   static int capacity(int expectedSize) {
     if (expectedSize < 3) {
@@ -291,6 +312,12 @@ public final class Maps {
    * use the {@code LinkedHashMap} constructor directly, taking advantage of <a
    * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
    * syntax</a>.
+   *
+   * @return a new, empty {@code LinkedHashMap}
+   */
+  /**
+   * Creates a <i>mutable</i>, empty, insertion-ordered {@code LinkedHashMap}. The returned map
+   * maintains the order in which entries are inserted, which is useful for predictable iteration.
    *
    * @return a new, empty {@code LinkedHashMap}
    */

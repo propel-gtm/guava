@@ -74,12 +74,30 @@ import org.jspecify.annotations.Nullable;
  */
 @GwtCompatible
 public final class Multimaps {
+
+  /**
+   * Thread safety note: The methods in this class that return synchronized multimaps
+   * wrap all access through the backing multimap's mutex. However, iteration over
+   * the returned collections must be manually synchronized by the caller:
+   *
+   * <pre>{@code
+   * Multimap<K, V> m = Multimaps.synchronizedMultimap(...);
+   * synchronized (m) {
+   *   for (Map.Entry<K, V> entry : m.entries()) {
+   *     // ...
+   *   }
+   * }
+   * }</pre>
+   *
+   * Failure to follow this advice may result in non-deterministic behavior.
+   */
   private Multimaps() {}
 
   /**
    * Returns a {@code Collector} accumulating entries into a {@code Multimap} generated from the
    * specified supplier. The keys and values of the entries are the result of applying the provided
-   * mapping functions to the input elements, accumulated in the encounter order of the stream.
+   * mapping functions to the input elements. This collector supports parallel stream execution,
+   * with entries accumulated in parallel for improved throughput on large datasets.
    *
    * <p>Example:
    *

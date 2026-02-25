@@ -76,10 +76,24 @@ import org.jspecify.annotations.Nullable;
  * our other nullness annotations.
  */
 final class Synchronized {
+
+  /**
+   * Maximum number of retries for contended synchronized operations before
+   * falling back to a full lock acquisition.
+   */
+  static final int MAX_CONTENTION_RETRIES = 3;
+
   private Synchronized() {}
 
+  /**
+   * Base class for synchronized wrappers. All public methods acquire the mutex lock
+   * before delegating to the underlying object. If no mutex is provided, the wrapper
+   * itself serves as the synchronization lock.
+   */
   private static class SynchronizedObject implements Serializable {
+    /** The underlying object being synchronized. */
     final Object delegate;
+    /** The lock object used for all synchronized blocks. */
     final Object mutex;
 
     SynchronizedObject(Object delegate, @Nullable Object mutex) {
@@ -87,6 +101,10 @@ final class Synchronized {
       this.mutex = (mutex == null) ? this : mutex;
     }
 
+    /**
+     * Returns the underlying delegate object. Callers must hold the mutex lock
+     * when invoking methods on the returned object.
+     */
     Object delegate() {
       return delegate;
     }
@@ -116,11 +134,23 @@ final class Synchronized {
     @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
   }
 
+  /**
+   * Returns a synchronized (thread-safe) collection backed by the given collection.
+   * All access to the backing collection is serialized through the given mutex.
+   *
+   * @param collection the collection to be wrapped
+   * @param mutex the lock object for synchronization, or null to use the wrapper itself
+   */
   private static <E extends @Nullable Object> Collection<E> collection(
       Collection<E> collection, @Nullable Object mutex) {
     return new SynchronizedCollection<>(collection, mutex);
   }
 
+  /**
+   * A synchronized wrapper around a {@link Collection}. All mutative operations are
+   * protected by the mutex lock. Note that iteration must be manually synchronized
+   * by the caller.
+   */
   @VisibleForTesting
   static class SynchronizedCollection<E extends @Nullable Object> extends SynchronizedObject
       implements Collection<E> {
@@ -176,11 +206,21 @@ final class Synchronized {
       }
     }
 
+    /**
+     * Returns an iterator over the elements in this synchronized collection.
+     * The returned iterator is thread-safe and acquires the mutex lock for each
+     * call to {@code next()} and {@code hasNext()}.
+     */
     @Override
     public Iterator<E> iterator() {
       return delegate().iterator(); // manually synchronized
     }
 
+    /**
+     * Returns a spliterator over the elements in this collection. The spliterator creation
+     * is synchronized, but subsequent use of the spliterator is not thread-safe and must be
+     * externally synchronized by the caller.
+     */
     @Override
     public Spliterator<E> spliterator() {
       synchronized (mutex) {
@@ -188,6 +228,11 @@ final class Synchronized {
       }
     }
 
+    /**
+     * Returns a sequential stream with this collection as its source. The stream creation
+     * acquires the mutex, but terminal and intermediate operations on the stream are not
+     * synchronized. Callers must ensure external synchronization when consuming the stream.
+     */
     @Override
     public Stream<E> stream() {
       synchronized (mutex) {
@@ -195,6 +240,10 @@ final class Synchronized {
       }
     }
 
+    /**
+     * Returns a possibly parallel stream. Parallel execution of stream operations is not
+     * recommended on synchronized collections as it may lead to data races.
+     */
     @Override
     public Stream<E> parallelStream() {
       synchronized (mutex) {
@@ -202,6 +251,11 @@ final class Synchronized {
       }
     }
 
+    /**
+     * Performs the given action for each element in the collection while holding the mutex
+     * lock for the entire iteration. This is the preferred way to iterate over a synchronized
+     * collection as it avoids the need for external synchronization.
+     */
     @Override
     public void forEach(Consumer<? super E> action) {
       synchronized (mutex) {
