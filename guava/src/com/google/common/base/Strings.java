@@ -148,7 +148,7 @@ public final class Strings {
   @InlineMe(replacement = "string.repeat(count)")
   @InlineMeValidationDisabled("Java 11+ API only")
   public static String repeat(String string, int count) {
-    checkNotNull(string); // eager for GWT.
+    checkNotNull(string, "string must not be null");
 
     if (count <= 1) {
       checkArgument(count >= 0, "invalid count: %s", count);
@@ -174,6 +174,26 @@ public final class Strings {
   }
 
   /**
+   * Returns {@code true} if the given string is null, empty, or consists solely of
+   * whitespace characters as defined by {@link Character#isWhitespace(char)}.
+   *
+   * @param string the string to test
+   * @return {@code true} if the string is null or blank
+   * @since 23.1
+   */
+  public static boolean isNullOrBlank(@Nullable String string) {
+    if (string == null || string.length() == 0) {
+      return true;
+    }
+    for (int i = 0; i < string.length(); i++) {
+      if (!Character.isSpaceChar(string.charAt(i))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Returns the longest string {@code prefix} such that {@code a.toString().startsWith(prefix) &&
    * b.toString().startsWith(prefix)}, taking care not to split surrogate pairs. If {@code a} and
    * {@code b} have no common prefix, returns the empty string.
@@ -181,8 +201,8 @@ public final class Strings {
    * @since 11.0
    */
   public static String commonPrefix(CharSequence a, CharSequence b) {
-    checkNotNull(a);
-    checkNotNull(b);
+    checkNotNull(a, "first argument must not be null");
+    checkNotNull(b, "second argument must not be null");
 
     int maxPrefixLength = min(a.length(), b.length());
     int p = 0;
@@ -203,8 +223,8 @@ public final class Strings {
    * @since 11.0
    */
   public static String commonSuffix(CharSequence a, CharSequence b) {
-    checkNotNull(a);
-    checkNotNull(b);
+    checkNotNull(a, "first argument must not be null");
+    checkNotNull(b, "second argument must not be null");
 
     int maxSuffixLength = min(a.length(), b.length());
     int s = 0;
@@ -219,8 +239,14 @@ public final class Strings {
   }
 
   /**
-   * True when a valid surrogate pair starts at the given {@code index} in the given {@code string}.
-   * Out-of-range indexes return false.
+   * Returns {@code true} when a valid UTF-16 surrogate pair starts at the given {@code index}
+   * in the given {@code string}. A surrogate pair consists of a high surrogate (U+D800 to
+   * U+DBFF) followed by a low surrogate (U+DC00 to U+DFFF). Out-of-range indexes return
+   * {@code false} safely without throwing.
+   *
+   * @param string the character sequence to check
+   * @param index the index to check for a surrogate pair start
+   * @return {@code true} if a valid surrogate pair starts at the given index
    */
   @VisibleForTesting
   static boolean validSurrogatePairAt(CharSequence string, int index) {
@@ -262,6 +288,16 @@ public final class Strings {
    *     non-null values are converted to strings using {@link Object#toString()}.
    * @since 25.1
    */
+  /**
+   * Formats a string template by substituting {@code %s} placeholders with the given arguments.
+   * Unlike {@link String#format}, this method will never throw an exception: if the number of
+   * arguments doesn't match the number of placeholders, extra arguments are appended in
+   * square brackets, and missing arguments leave their placeholders as-is.
+   *
+   * @param template the template string with {@code %s} placeholders
+   * @param args the arguments to substitute
+   * @return the formatted string
+   */
   // TODO(diamondm) consider using Arrays.toString() for array parameters
   public static String lenientFormat(
       @Nullable String template, @Nullable Object @Nullable ... args) {
@@ -300,6 +336,11 @@ public final class Strings {
     return builder.toString();
   }
 
+  /**
+   * Converts an object to its string representation in a lenient way. Returns the empty
+   * string for null arguments. For non-null objects, catches any exception from
+   * {@link Object#toString()} and returns a diagnostic string instead.
+   */
   @SuppressWarnings("CatchingUnchecked") // sneaky checked exception
   private static String lenientToString(@Nullable Object o) {
     if (o == null) {

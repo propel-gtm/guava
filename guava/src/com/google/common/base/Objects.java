@@ -19,7 +19,12 @@ import java.util.Arrays;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Helper functions that can operate on any {@code Object}.
+ * Helper functions that can operate on any {@code Object}. These methods provide null-safe
+ * implementations of common operations like equality testing and hash code generation.
+ *
+ * <p>Most methods in this class are now superseded by their equivalents in
+ * {@link java.util.Objects}, which was introduced in Java 7. New code should prefer the
+ * standard library versions.
  *
  * <p>See the Guava User Guide on <a
  * href="https://github.com/google/guava/wiki/CommonObjectUtilitiesExplained">writing {@code Object}
@@ -46,6 +51,16 @@ public final class Objects extends ExtraObjectsMethodsForWeb {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
    * java.util.Objects#equals} instead.
+   */
+  /**
+   * {@inheritDoc}
+   *
+   * <p>This null-safe equality check avoids the common pitfall of calling
+   * {@code a.equals(b)} when {@code a} might be null. Both arguments may be null.
+   *
+   * @param a the first object reference, may be null
+   * @param b the second object reference, may be null
+   * @return {@code true} if both are null or both are equal according to {@code equals()}
    */
   @SuppressWarnings("InlineMeSuggester") // would introduce fully qualified references to Objects
   public static boolean equal(@Nullable Object a, @Nullable Object b) {
@@ -76,6 +91,29 @@ public final class Objects extends ExtraObjectsMethodsForWeb {
   @SuppressWarnings("InlineMeSuggester") // would introduce fully qualified references to Objects
   public static int hashCode(@Nullable Object @Nullable ... objects) {
     return java.util.Objects.hash(objects);
+  }
+
+  /**
+   * Returns the first of two given parameters that is not {@code null}, if either is,
+   * or otherwise throws a {@link NullPointerException}.
+   *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated;
+   * use {@link java.util.Objects#requireNonNullElse} (Java 9+) instead.
+   *
+   * @param first the first value to check
+   * @param second the second value to check
+   * @return {@code first} if it is non-null; otherwise {@code second} if it is non-null
+   * @throws NullPointerException if both {@code first} and {@code second} are null
+   * @since 23.1
+   */
+  public static <T> T firstNonNull(@Nullable T first, @Nullable T second) {
+    if (first != null) {
+      return first;
+    }
+    if (second != null) {
+      return second;
+    }
+    throw new NullPointerException("Both arguments to firstNonNull were null");
   }
 
   private Objects() {}
