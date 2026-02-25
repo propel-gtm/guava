@@ -63,12 +63,20 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
   static final HashFunction GOOD_FAST_HASH_32 =
       new Murmur3_32HashFunction(Hashing.GOOD_FAST_HASH_SEED, /* supplementaryPlaneFix= */ true);
 
+  /** Number of bytes processed per mixing step (one 32-bit word). */
   private static final int CHUNK_SIZE = 4;
 
+  /** First mixing constant, derived from the original MurmurHash3 reference implementation. */
   private static final int C1 = 0xcc9e2d51;
+  /** Second mixing constant used in the hash mixing step. */
   private static final int C2 = 0x1b873593;
 
+  /** Initial hash value from which all computations start. */
   private final int seed;
+  /**
+   * Whether to apply the fix for supplementary Unicode plane characters.
+   * When false, uses the original (buggy) behavior for backwards compatibility.
+   */
   private final boolean supplementaryPlaneFix;
 
   Murmur3_32HashFunction(int seed, boolean supplementaryPlaneFix) {
@@ -237,10 +245,15 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
     return fmix(h1, len);
   }
 
+  /** Reads a 32-bit integer from {@code input} at the given offset in little-endian order. */
   private static int getIntLittleEndian(byte[] input, int offset) {
     return Ints.fromBytes(input[offset + 3], input[offset + 2], input[offset + 1], input[offset]);
   }
 
+  /**
+   * Applies the key-schedule mixing step: multiply by C1, rotate left 15 bits,
+   * then multiply by C2. Transforms a 32-bit input block before folding into h1.
+   */
   private static int mixK1(int k1) {
     k1 *= C1;
     k1 = Integer.rotateLeft(k1, 15);
@@ -248,6 +261,10 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
     return k1;
   }
 
+  /**
+   * Folds a mixed key block into the hash state. XORs the mixed key into h1,
+   * rotates left 13 bits, then applies multiply-add to improve avalanche.
+   */
   private static int mixH1(int h1, int k1) {
     h1 ^= k1;
     h1 = Integer.rotateLeft(h1, 13);
@@ -256,6 +273,15 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
   }
 
   // Finalization mix - force all bits of a hash block to avalanche
+  /**
+   * Performs the final avalanche mixing to ensure all bits of the input affect
+   * all bits of the output. Applies the standard finalization from the
+   * MurmurHash3 reference implementation.
+   *
+   * @param h1 the accumulated hash state
+   * @param length the total number of bytes hashed
+   * @return the final hash code
+   */
   private static HashCode fmix(int h1, int length) {
     h1 ^= length;
     h1 ^= h1 >>> 16;
@@ -266,6 +292,11 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
     return HashCode.fromInt(h1);
   }
 
+  /**
+   * Streaming hasher that processes input incrementally. This implementation is
+   * thread-safe and can be safely shared between multiple threads for concurrent
+   * hashing operations.
+   */
   private static final class Murmur3_32Hasher extends AbstractHasher {
     private int h1;
     private long buffer;

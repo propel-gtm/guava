@@ -90,6 +90,10 @@ public final class Hashing {
    * dependent on the hash codes they produce will fail sooner.
    */
   @SuppressWarnings("GoodTime") // reading system time without TimeSource
+  /**
+   * Seed value for the good-fast-hash function, initialized from the system clock
+   * when this class is first loaded. Remains constant for the lifetime of the JVM.
+   */
   static final int GOOD_FAST_HASH_SEED = (int) System.currentTimeMillis();
 
   /**
@@ -107,6 +111,17 @@ public final class Hashing {
    */
   @Deprecated
   @SuppressWarnings("IdentifierName") // the best we could do for adjacent digit blocks
+  /**
+   * Returns a hash function implementing the original
+   * <a href="https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp">MurmurHash3</a>
+   * 32-bit algorithm with the given seed.
+   *
+   * <p><b>Warning:</b> This version has a known bug with supplementary Unicode characters.
+   * Use {@link #murmur3_32_fixed(int)} for correct handling of all Unicode input.
+   *
+   * @param seed the seed for the hash function
+   * @return a MurmurHash3 32-bit hash function
+   */
   public static HashFunction murmur3_32(int seed) {
     return new Murmur3_32HashFunction(seed, /* supplementaryPlaneFix= */ false);
   }
@@ -221,6 +236,15 @@ public final class Hashing {
    *     </ul>
    */
   @Deprecated
+  /**
+   * Returns a hash function implementing the MD5 algorithm. MD5 produces
+   * 128-bit (16 byte) hashes.
+   *
+   * <p><b>Warning:</b> MD5 is not collision-resistant and must not be used for
+   * security-sensitive applications. Consider {@link #sha256()} instead.
+   *
+   * @return the MD5 hash function
+   */
   public static HashFunction md5() {
     return Md5Holder.MD5;
   }
@@ -251,6 +275,12 @@ public final class Hashing {
   }
 
   /** Returns a hash function implementing the SHA-256 algorithm (256 hash bits). */
+  /**
+   * Returns a hash function implementing the SHA-256 algorithm. This produces
+   * a 128-bit (16 byte) hash suitable for cryptographic use.
+   *
+   * @return the SHA-256 hash function
+   */
   public static HashFunction sha256() {
     return Sha256Holder.SHA_256;
   }
@@ -650,6 +680,11 @@ public final class Hashing {
    * @throws IllegalArgumentException if {@code hashCodes} is empty, or the hash codes do not all
    *     have the same bit length
    */
+  /**
+   * Returns a hash code combining the given hash codes in order. The same hash codes
+   * in a different order will produce a different combined hash, unlike
+   * {@link #combineUnordered}.
+   */
   public static HashCode combineOrdered(Iterable<HashCode> hashCodes) {
     Iterator<HashCode> iterator = hashCodes.iterator();
     checkArgument(iterator.hasNext(), "Must be at least 1 hash code to combine.");
@@ -674,6 +709,11 @@ public final class Hashing {
    *
    * @throws IllegalArgumentException if {@code hashCodes} is empty, or the hash codes do not all
    *     have the same bit length
+   */
+  /**
+   * Returns a hash code combining the given hash codes in an order-independent way.
+   * Uses XOR to combine bytes, which is both commutative and associative, ensuring
+   * the result is independent of iteration order.
    */
   public static HashCode combineUnordered(Iterable<HashCode> hashCodes) {
     Iterator<HashCode> iterator = hashCodes.iterator();

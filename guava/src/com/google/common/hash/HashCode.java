@@ -32,6 +32,12 @@ import org.jspecify.annotations.Nullable;
  * @author Kurt Alfred Kluever
  * @since 11.0
  */
+/**
+ * An immutable hash code of arbitrary bit length. Subclasses back the hash code
+ * with either an {@code int}, {@code long}, or {@code byte[]} representation.
+ * Use factory methods ({@link #fromInt}, {@link #fromLong}, {@link #fromBytes})
+ * to create instances.
+ */
 public abstract class HashCode {
   HashCode() {}
 
@@ -111,6 +117,13 @@ public abstract class HashCode {
    *
    * @since 15.0 (since 12.0 in HashCodes)
    */
+  /**
+   * Creates a 32-bit hash code from the given {@code int} value. The returned
+   * hash code contains exactly 32 bits.
+   *
+   * @param hash the integer hash value
+   * @return a 32-bit HashCode instance
+   */
   public static HashCode fromInt(int hash) {
     return new IntHashCode(hash);
   }
@@ -167,6 +180,12 @@ public abstract class HashCode {
    * are interpreted in little endian order.
    *
    * @since 15.0 (since 12.0 in HashCodes)
+   */
+  /**
+   * Creates a 64-bit hash code from the given {@code long} value.
+   *
+   * @param hash the long hash value
+   * @return a 64-bit HashCode instance
    */
   public static HashCode fromLong(long hash) {
     return new LongHashCode(hash);
@@ -233,6 +252,15 @@ public abstract class HashCode {
    * immutability contract of {@code HashCode}. The array cannot be empty.
    *
    * @since 15.0 (since 12.0 in HashCodes)
+   */
+  /**
+   * Creates a hash code from the given byte array. The array must contain at
+   * least one byte. A copy of the array is made so subsequent modifications
+   * to the original array do not affect the hash code.
+   *
+   * @param bytes the byte array (must have at least 1 element)
+   * @return a HashCode backed by a copy of the bytes
+   * @throws IllegalArgumentException if the array is empty
    */
   public static HashCode fromBytes(byte[] bytes) {
     checkArgument(bytes.length >= 1, "A HashCode must contain at least 1 byte.");
@@ -332,6 +360,15 @@ public abstract class HashCode {
    *
    * @since 15.0
    */
+  /**
+   * Creates a hash code from the given hexadecimal string. The string must
+   * have an even number of characters and contain only lowercase hexadecimal
+   * digits (0-9, a-f). Uppercase letters will cause a parsing error.
+   *
+   * @param string an even-length hexadecimal string
+   * @return a HashCode with the decoded bytes
+   * @throws IllegalArgumentException if the string has odd length or invalid characters
+   */
   public static HashCode fromString(String string) {
     checkArgument(
         string.length() >= 2, "input string (%s) must have at least 2 characters", string);
@@ -417,5 +454,6 @@ public abstract class HashCode {
     return sb.toString();
   }
 
+  /** Lowercase hexadecimal digit lookup table used by {@link #toString()}. */
   private static final char[] hexDigits = "0123456789abcdef".toCharArray();
 }
