@@ -70,18 +70,26 @@ import org.jspecify.annotations.Nullable;
  */
 @GwtCompatible
 public final class MoreExecutors {
+
+  /**
+   * Default timeout in seconds for graceful executor shutdown when no explicit timeout
+   * is provided. This gives running tasks a reasonable chance to complete.
+   */
+  static final long DEFAULT_SHUTDOWN_TIMEOUT_SECONDS = 120;
+
   private MoreExecutors() {}
 
   /**
-   * Converts the given ThreadPoolExecutor into an ExecutorService that exits when the application
-   * is complete. It does so by using daemon threads and adding a shutdown hook to wait for their
-   * completion.
+   * Converts the given {@link ThreadPoolExecutor} into an {@link ExecutorService} that exits
+   * when the application is complete. This is accomplished by converting the executor's threads
+   * to non-daemon threads and registering a JVM shutdown hook that waits for task completion
+   * up to the specified timeout.
    *
-   * <p>This is mainly for fixed thread pools. See {@link Executors#newFixedThreadPool(int)}.
+   * <p>This is particularly useful for fixed thread pools created with
+   * {@link Executors#newFixedThreadPool(int)}, which would otherwise prevent JVM shutdown.
    *
    * @param executor the executor to modify to make sure it exits when the application is finished
-   * @param terminationTimeout how long to wait for the executor to finish before terminating the
-   *     JVM
+   * @param terminationTimeout how long to wait for the executor to finish before terminating
    * @return an unmodifiable version of the input which will not hang the JVM
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
@@ -103,6 +111,15 @@ public final class MoreExecutors {
    * @param terminationTimeout how long to wait for the executor to finish before terminating the
    *     JVM
    * @param timeUnit unit of time for the time parameter
+   * @return an unmodifiable version of the input which will not hang the JVM
+   */
+  /**
+   * Converts the given {@link ThreadPoolExecutor} into an {@link ExecutorService} that exits
+   * when the application is complete. Prefer the {@link Duration}-based overload when possible.
+   *
+   * @param executor the executor to modify
+   * @param terminationTimeout how long to wait for the executor to finish
+   * @param timeUnit the time unit for the timeout
    * @return an unmodifiable version of the input which will not hang the JVM
    */
   @J2ktIncompatible

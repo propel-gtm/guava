@@ -77,18 +77,33 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
    */
 
   /**
-   * Tag interface marking trusted subclasses. This enables some optimizations. The implementation
-   * of this interface must also be an AbstractFuture and must not override or expose for overriding
-   * any of the public methods of ListenableFuture.
+   * Tag interface marking trusted subclasses. This enables some optimizations: trusted futures
+   * can skip certain safety checks in {@code setFuture} because their {@code get()}
+   * implementation is known not to be overridden.
+   *
+   * <p>The implementation of this interface must:
+   * <ul>
+   *   <li>extend {@code AbstractFuture}
+   *   <li>not override any public methods of {@code ListenableFuture}
+   *   <li>not expose any of those methods for overriding
+   * </ul>
    */
   interface Trusted<V extends @Nullable Object> extends ListenableFuture<V> {}
 
   /**
    * A less abstract subclass of AbstractFuture. This can be used to optimize setFuture by ensuring
    * that {@link #get} calls exactly the implementation of {@link AbstractFuture#get}.
+   *
+   * <p>The get() method in this class blocks until the future is complete and always returns
+   * a non-null result. Cancellation is not propagated to the caller.
    */
   abstract static class TrustedFuture<V extends @Nullable Object> extends AbstractFuture<V>
       implements Trusted<V> {
+    /**
+     * Waits if necessary for the computation to complete, and then retrieves its result.
+     * This implementation is marked {@code final} to prevent subclasses from breaking
+     * the setFuture optimization.
+     */
     @CanIgnoreReturnValue
     @Override
     @ParametricNullness

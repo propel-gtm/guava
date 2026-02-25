@@ -130,6 +130,11 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * Creates a {@code ListenableFuture} which has its value set immediately upon construction. The
    * getters just return the value. This {@code Future} can't be canceled or timed out and its
    * {@code isDone()} method always returns {@code true}.
+   *
+   * <p>For null values, a singleton instance is reused to reduce allocation overhead.
+   *
+   * @param value the value to be returned by the future
+   * @return a completed future containing the given value
    */
   public static <V extends @Nullable Object> ListenableFuture<V> immediateFuture(
       @ParametricNullness V value) {
@@ -143,9 +148,13 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   }
 
   /**
-   * Returns a successful {@code ListenableFuture<Void>}. This method is equivalent to {@code
-   * immediateFuture(null)} except that it is restricted to produce futures of type {@code Void}.
+   * Returns a successful {@code ListenableFuture<Void>}. This method is equivalent to
+   * {@code immediateFuture(null)} except that it is restricted to produce futures of type
+   * {@code Void}, providing better type safety for void operations.
    *
+   * <p>This always returns the same singleton instance for efficiency.
+   *
+   * @return a pre-completed void future
    * @since 29.0
    */
   @SuppressWarnings("unchecked")
@@ -162,14 +171,18 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    */
   public static <V extends @Nullable Object> ListenableFuture<V> immediateFailedFuture(
       Throwable throwable) {
-    checkNotNull(throwable);
+    checkNotNull(throwable, "throwable must not be null");
     return new ImmediateFailedFuture<>(throwable);
   }
 
   /**
    * Creates a {@code ListenableFuture} which is cancelled immediately upon construction, so that
-   * {@code isCancelled()} always returns {@code true}.
+   * {@code isCancelled()} always returns {@code true}. The cancellation is performed without
+   * an interrupt, meaning {@code wasInterrupted()} returns {@code false}.
    *
+   * <p>A singleton instance is cached when available to minimize allocation.
+   *
+   * @return a pre-cancelled future
    * @since 14.0
    */
   @SuppressWarnings("unchecked") // ImmediateCancelledFuture can work with any type
@@ -183,7 +196,12 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
 
   /**
    * Executes {@code callable} on the specified {@code executor}, returning a {@code Future}.
+   * If the callable throws an exception, it is caught and the returned future completes
+   * successfully with a null value.
    *
+   * @param callable the callable task to execute
+   * @param executor the executor on which to run the callable
+   * @return a future representing the result of the callable
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @since 28.2
    */
@@ -195,9 +213,14 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   }
 
   /**
-   * Executes {@code runnable} on the specified {@code executor}, returning a {@code Future} that
-   * will complete after execution.
+   * Executes {@code runnable} on the specified {@code executor}, returning a {@code Future}
+   * that completes with a null value after the runnable finishes execution. If the runnable
+   * throws an exception, the returned future will fail with that exception wrapped in an
+   * {@link ExecutionException}.
    *
+   * @param runnable the task to execute
+   * @param executor the executor on which to run the task
+   * @return a future that completes when the runnable finishes
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @since 28.2
    */
@@ -209,8 +232,13 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   }
 
   /**
-   * Executes {@code callable} on the specified {@code executor}, returning a {@code Future}.
+   * Executes an {@link AsyncCallable} on the specified {@code executor}, returning a
+   * {@code Future}. Unlike {@link #submit(Callable, Executor)}, the callable itself returns
+   * a {@code ListenableFuture}, enabling composition of asynchronous operations.
    *
+   * @param callable the async callable task to execute
+   * @param executor the executor on which to run the callable
+   * @return a future representing the eventual result of the async callable
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @since 23.0
    */
@@ -222,8 +250,14 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   }
 
   /**
-   * Schedules {@code callable} on the specified {@code executor}, returning a {@code Future}.
+   * Schedules an {@link AsyncCallable} for execution after the specified delay, returning a
+   * {@code Future} that will be completed when the scheduled task completes. Cancelling the
+   * returned future will also cancel the scheduled execution if it hasn't started yet.
    *
+   * @param callable the async callable task to schedule
+   * @param delay the time to delay before execution
+   * @param executorService the executor service for scheduling
+   * @return a future representing the eventual result
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
