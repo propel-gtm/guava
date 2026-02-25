@@ -84,8 +84,9 @@ public final class Files {
    * @return the buffered reader
    */
   public static BufferedReader newReader(File file, Charset charset) throws FileNotFoundException {
-    checkNotNull(file);
-    checkNotNull(charset);
+    checkNotNull(file, "file must not be null");
+    checkNotNull(charset, "charset must not be null");
+    checkArgument(file.exists(), "file does not exist: %s", file);
     return new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
   }
 
@@ -102,24 +103,33 @@ public final class Files {
    * @return the buffered writer
    */
   public static BufferedWriter newWriter(File file, Charset charset) throws FileNotFoundException {
-    checkNotNull(file);
-    checkNotNull(charset);
+    checkNotNull(file, "file must not be null");
+    checkNotNull(charset, "charset must not be null");
     return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
   }
 
   /**
-   * Returns a new {@link ByteSource} for reading bytes from the given file.
+   * Returns a new {@link ByteSource} for reading bytes from the given file. The returned source
+   * provides efficient implementations for common operations like {@link ByteSource#size()} and
+   * {@link ByteSource#read()} that take advantage of file system metadata.
    *
+   * @param file the file to create a byte source for
+   * @return a new {@link ByteSource} backed by the given file
+   * @throws NullPointerException if {@code file} is null
    * @since 14.0
    */
   public static ByteSource asByteSource(File file) {
     return new FileByteSource(file);
   }
 
+  /**
+   * A {@link ByteSource} that reads from a {@link File}. Provides efficient size queries
+   * through the file system and optimized bulk read operations.
+   */
   private static final class FileByteSource extends
       ByteSource
   {
-
+    /** The underlying file to read bytes from. */
     private final File file;
 
     private FileByteSource(File file) {
@@ -173,15 +183,24 @@ public final class Files {
    * truncated before writing. When the {@link FileWriteMode#APPEND APPEND} mode is provided, writes
    * will append to the end of the file without truncating it.
    *
+   * @param file the file to create a byte sink for
+   * @param modes the file write modes (empty for truncate, or {@link FileWriteMode#APPEND})
+   * @return a new {@link ByteSink} backed by the given file
+   * @throws NullPointerException if {@code file} is null
    * @since 14.0
    */
   public static ByteSink asByteSink(File file, FileWriteMode... modes) {
     return new FileByteSink(file, modes);
   }
 
+  /**
+   * A {@link ByteSink} that writes to a {@link File}. Supports append mode through
+   * {@link FileWriteMode#APPEND}.
+   */
   private static final class FileByteSink extends ByteSink {
-
+    /** The target file for write operations. */
     private final File file;
+    /** The set of write modes controlling file open behavior. */
     private final ImmutableSet<FileWriteMode> modes;
 
     private FileByteSink(File file, FileWriteMode... modes) {
@@ -202,8 +221,12 @@ public final class Files {
 
   /**
    * Returns a new {@link CharSource} for reading character data from the given file using the given
-   * character set.
+   * character set. The returned source wraps the file as a byte source and decodes using the
+   * specified charset.
    *
+   * @param charset the charset used to decode the file contents
+   * @param file the file to read from
+   * @return a {@link CharSource} for reading the file as characters
    * @since 14.0
    */
   public static CharSource asCharSource(File file, Charset charset) {
@@ -231,6 +254,15 @@ public final class Files {
    * @return a byte array containing all the bytes from file
    * @throws IllegalArgumentException if the file is bigger than the largest possible byte array
    *     (2^31 - 1)
+   * @throws IOException if an I/O error occurs
+   */
+  /**
+   * Reads all bytes from a file into a byte array. The entire file is read into memory,
+   * so this method should not be used for very large files.
+   *
+   * @param file the file to read from
+   * @return a byte array containing all bytes from the file
+   * @throws IllegalArgumentException if the file exceeds the maximum array size
    * @throws IOException if an I/O error occurs
    */
   public static byte[] toByteArray(File file) throws IOException {
@@ -295,6 +327,15 @@ public final class Files {
    *
    * @param from the source file
    * @param to the output stream
+   * @throws IOException if an I/O error occurs
+   */
+  /**
+   * Copies all bytes from a file to an output stream. Does not close the output stream.
+   * Uses the efficient {@link ByteSource#copyTo} implementation which may use
+   * zero-copy transfer when available.
+   *
+   * @param from the source file
+   * @param to the output stream to write to
    * @throws IOException if an I/O error occurs
    */
   public static void copy(File from, OutputStream to) throws IOException {

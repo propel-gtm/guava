@@ -46,7 +46,12 @@ public final class CharStreams {
   // 2K chars (4K bytes)
   private static final int DEFAULT_BUF_SIZE = 0x800;
 
-  /** Creates a new {@code CharBuffer} for buffering reads or writes. */
+  /**
+   * Creates a new {@code CharBuffer} for buffering reads or writes. The buffer is allocated
+   * with a capacity of {@link #DEFAULT_BUF_SIZE} characters.
+   *
+   * @return a newly allocated {@code CharBuffer}
+   */
   static CharBuffer createBuffer() {
     return CharBuffer.allocate(DEFAULT_BUF_SIZE);
   }
@@ -164,12 +169,13 @@ public final class CharStreams {
   }
 
   /**
-   * Reads all characters from a {@link Readable} object into a new {@link StringBuilder} instance.
-   * Does not close the {@code Readable}.
+   * Reads all characters from a {@link Readable} into a new {@link StringBuilder}. Optimizes
+   * for the common case where the input is a {@link Reader} by using the bulk char[] read path
+   * instead of the slower {@link CharBuffer}-based generic path.
    *
-   * @param r the object to read from
-   * @return a {@link StringBuilder} containing all the characters
-   * @throws IOException if an I/O error occurs
+   * @param r the readable source
+   * @return a {@link StringBuilder} containing all characters from the source
+   * @throws IOException if an I/O error occurs during reading
    */
   private static StringBuilder toStringBuilder(Readable r) throws IOException {
     StringBuilder sb = new StringBuilder();
@@ -242,9 +248,15 @@ public final class CharStreams {
   }
 
   /**
-   * Reads and discards data from the given {@code Readable} until the end of the stream is reached.
-   * Returns the total number of chars read. Does not close the stream.
+   * Reads and discards data from the given {@code Readable} until the end of the stream is
+   * reached. Returns the total number of characters read. Does not close the stream.
    *
+   * <p>This method is useful for consuming remaining input when only a prefix is needed,
+   * or for measuring the total character count of a readable source.
+   *
+   * @param readable the readable to exhaust
+   * @return the total number of characters read and discarded
+   * @throws IOException if an I/O error occurs
    * @since 20.0
    */
   @CanIgnoreReturnValue

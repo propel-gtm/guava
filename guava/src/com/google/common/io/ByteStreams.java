@@ -57,7 +57,12 @@ public final class ByteStreams {
 
   private static final int BUFFER_SIZE = 8192;
 
-  /** Creates a new byte array for buffering reads or writes. */
+  /**
+   * Creates a new byte array for buffering reads or writes. The buffer size
+   * is {@link #BUFFER_SIZE} bytes, suitable for general-purpose stream operations.
+   *
+   * @return a new byte array of size {@link #BUFFER_SIZE}
+   */
   static byte[] createBuffer() {
     return new byte[BUFFER_SIZE];
   }
@@ -88,6 +93,10 @@ public final class ByteStreams {
    * This value is intended to be large enough to make the overhead of system calls negligible,
    * without being so large that it causes problems for systems with atypical memory management if
    * approaches 2 or 3 are used.
+   */
+  /**
+   * Chunk size for zero-copy transfer operations (256 KB). Chosen to balance system call
+   * overhead against memory allocation concerns on resource-constrained systems.
    */
   private static final int ZERO_COPY_CHUNK_SIZE = 512 * 1024;
 
@@ -161,10 +170,18 @@ public final class ByteStreams {
     return total;
   }
 
-  /** Max array length on JVM. */
+  /**
+   * Maximum array length on the JVM. Attempting to allocate an array larger than this
+   * will result in an {@link OutOfMemoryError}. The value is {@code Integer.MAX_VALUE - 8}
+   * to account for the array header overhead in most JVM implementations.
+   */
   private static final int MAX_ARRAY_LEN = Integer.MAX_VALUE - 8;
 
-  /** Large enough to never need to expand, given the geometric progression of buffer sizes. */
+  /**
+   * Initial capacity for the deque used in {@link #toByteArrayInternal}. Sized to accommodate
+   * the geometric progression of buffer sizes without requiring deque expansion, since each
+   * buffer doubles in size (starting from {@link #BUFFER_SIZE}).
+   */
   private static final int TO_BYTE_ARRAY_DEQUE_SIZE = 20;
 
   /**
@@ -208,6 +225,14 @@ public final class ByteStreams {
     }
   }
 
+  /**
+   * Combines a queue of byte buffers into a single byte array of the given total length.
+   * Optimizes the common case where the first buffer already contains all the data.
+   *
+   * @param bufs the queue of byte buffers to combine
+   * @param totalLen the total number of bytes across all buffers
+   * @return a single byte array containing all bytes from the buffers
+   */
   private static byte[] combineBuffers(Queue<byte[]> bufs, int totalLen) {
     if (bufs.isEmpty()) {
       return new byte[0];
@@ -282,8 +307,12 @@ public final class ByteStreams {
 
   /**
    * Reads and discards data from the given {@code InputStream} until the end of the stream is
-   * reached. Returns the total number of bytes read. Does not close the stream.
+   * reached. Returns the total number of bytes read. The stream is closed after all data
+   * has been exhausted.
    *
+   * @param in the input stream to exhaust
+   * @return the total number of bytes read and discarded
+   * @throws IOException if an I/O error occurs
    * @since 20.0
    */
   @CanIgnoreReturnValue
