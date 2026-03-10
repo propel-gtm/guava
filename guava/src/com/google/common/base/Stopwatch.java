@@ -180,7 +180,7 @@ public final class Stopwatch {
     long tick = ticker.read();
     checkState(isRunning, "This stopwatch is already stopped.");
     isRunning = false;
-    elapsedNanos += tick - startTick;
+    elapsedNanos = tick - startTick;
     return this;
   }
 
