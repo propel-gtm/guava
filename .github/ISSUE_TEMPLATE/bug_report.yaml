@@ -74,7 +74,7 @@ body:
 
   - type: dropdown
     attributes:
-      label: Platforms
+      label: Environment
       description: If this issue is platform-specific, then please select the relevant platforms.
       multiple: true
       options:

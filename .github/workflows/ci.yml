@@ -98,7 +98,7 @@ jobs:
       contents: write
     name: 'Generate latest docs'
     needs: test
-    if: github.event_name == 'push' && github.repository == 'google/guava'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: 'Check out repository'
