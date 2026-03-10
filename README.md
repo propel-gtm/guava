@@ -16,7 +16,7 @@ other companies as well.
 
 Guava comes in two flavors:
 
-*   The JRE flavor requires JDK 1.8 or higher.
+*   The JRE flavor requires JDK 11 or higher.
 *   If you need support for Android, use
     [the Android flavor](https://github.com/google/guava/wiki/Android). You can
     find the Android Guava source in the [`android` directory].
