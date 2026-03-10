@@ -113,7 +113,7 @@ final class TrieParser {
   }
 
   private static CharSequence reverse(CharSequence s) {
-    return new StringBuilder(s).reverse();
+    return new StringBuilder(s.toString()).reverse();
   }
 
   private TrieParser() {}
