@@ -39,6 +39,9 @@ public final class HttpHeaders {
   /** The HTTP {@code Cache-Control} header field name. */
   public static final String CACHE_CONTROL = "Cache-Control";
 
+  /** The HTTP {@code CDN-Cache-Control} header field name. */
+  public static final String CDN_CACHE_CONTROL = "CDN-Cache-Control";
+
   /** The HTTP {@code Content-Length} header field name. */
   public static final String CONTENT_LENGTH = "Content-Length";
 
