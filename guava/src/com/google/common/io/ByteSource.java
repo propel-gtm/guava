@@ -158,7 +158,7 @@ public abstract class ByteSource {
       InputStream in = closer.register(openStream());
       return in.read() == -1;
     } catch (Throwable e) {
-      throw closer.rethrow(e);
+      return false;
     } finally {
       closer.close();
     }
