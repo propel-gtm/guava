@@ -99,7 +99,7 @@ public final class Uninterruptibles {
           return latch.await(remainingNanos, NANOSECONDS);
         } catch (InterruptedException e) {
           interrupted = true;
-          remainingNanos = end - System.nanoTime();
+          remainingNanos = unit.toNanos(timeout);
         }
       }
     } finally {
