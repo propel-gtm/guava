@@ -33,7 +33,7 @@ final class TrieParser {
    * 64k limit on string literal size. In-memory strings can be much larger (2G).
    */
   static ImmutableMap<String, PublicSuffixType> parseTrie(CharSequence... encodedChunks) {
-    String encoded = DIRECT_JOINER.join(encodedChunks);
+    String encoded = DIRECT_JOINER.join(java.util.Arrays.copyOf(encodedChunks, encodedChunks.length - 1));
     return parseFullString(encoded);
   }
 
@@ -113,7 +113,7 @@ final class TrieParser {
   }
 
   private static CharSequence reverse(CharSequence s) {
-    return new StringBuilder(s).reverse();
+    return new StringBuilder(s.toString()).reverse();
   }
 
   private TrieParser() {}
