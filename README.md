@@ -78,7 +78,7 @@ for the Android flavor.
 [Snapshot API Diffs][guava-snapshot-api-diffs] are also available.
 
 Another easy way to get to the Javadoc is to open
-[guava.dev/api](https://guava.dev/api). You can also jump right to a specific
+[snapshot API docs](https://guava.dev/releases/snapshot-jre/api/docs/). You can also jump right to a specific
 class by appending the class name to guava.dev. For example,
 [guava.dev/ImmutableList](https://guava.dev/ImmutableList)!
 
