@@ -1,0 +1,179 @@
+# Header intake audit
+
+This local training reference expands the review surface for `training/header-intake-expanded`.
+
+## Context
+- Source branch: `sweep/header-intake-maintenance`
+- Scope: repository maintenance, contributor flow, release automation, and API surface review.
+- Audience: reviewers walking a large unpublished training branch.
+
+## Review Track 01
+- Focus area: Confirm terminology stays aligned across the touched files.
+- Checklist item 001: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 002: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 003: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 004: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 005: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 006: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 007: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 008: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 009: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 010: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 011: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 012: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 013: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 014: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 015: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 016: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 017: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 018: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 019: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 020: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 021: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 022: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 02
+- Focus area: Check whether mirrored Android and JRE guidance still match after cleanup.
+- Checklist item 023: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 024: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 025: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 026: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 027: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 028: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 029: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 030: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 031: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 032: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 033: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 034: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 035: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 036: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 037: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 038: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 039: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 040: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 041: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 042: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 043: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 044: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 03
+- Focus area: Review the dependency between contributor docs and workflow defaults.
+- Checklist item 045: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 046: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 047: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 048: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 049: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 050: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 051: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 052: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 053: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 054: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 055: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 056: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 057: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 058: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 059: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 060: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 061: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 062: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 063: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 064: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 065: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 066: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 04
+- Focus area: Track whether release documentation still reflects the current build path.
+- Checklist item 067: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 068: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 069: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 070: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 071: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 072: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 073: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 074: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 075: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 076: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 077: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 078: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 079: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 080: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 081: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 082: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 083: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 084: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 085: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 086: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 087: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 088: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 05
+- Focus area: Compare generated data handling with the corresponding maintenance notes.
+- Checklist item 089: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 090: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 091: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 092: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 093: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 094: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 095: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 096: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 097: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 098: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 099: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 100: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 101: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 102: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 103: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 104: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 105: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 106: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 107: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 108: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 109: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 110: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 06
+- Focus area: Look for changes that widen permissions, scope, or rollout conditions.
+- Checklist item 111: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 112: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 113: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 114: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 115: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 116: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 117: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 118: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 119: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 120: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 121: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 122: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 123: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 124: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 125: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 126: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 127: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 128: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 129: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 130: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 131: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 132: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 07
+- Focus area: Inspect whether API surface updates are reflected consistently in both flavors.
+- Checklist item 133: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 134: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 135: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 136: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 137: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 138: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 139: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 140: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 141: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 142: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 143: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 144: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 145: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 146: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 147: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 148: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 149: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 150: compare `guava/src/com/google/common/util/concurrent/Uninterruptibles.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 151: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 152: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 153: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 154: compare `.github/workflows/scorecard.yml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 08
+- Focus area: Verify that fallback paths preserve the previous runtime contract.
