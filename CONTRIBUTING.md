@@ -90,7 +90,7 @@ again.
 The most reliable way to build and test Guava is:
 
 ```shell
-./mvnw clean install
+./mvnw test
 ```
 
 (Our benchmarks, however, are
