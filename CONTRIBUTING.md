@@ -4,7 +4,7 @@ How to contribute
 Thank you so much for wanting to contribute to Guava! Here are a few important
 things you should know about contributing:
 
-1.  API changes require discussion, use cases, etc. Code comes later.
+1.  API changes can start with code if the patch is small.
 2.  Pull requests are great for small fixes for bugs, documentation, etc.
 3.  Pull requests are not merged directly into the master branch.
 4.  Code contributions require signing a Google CLA.
