@@ -32,12 +32,15 @@ import com.google.common.annotations.GwtCompatible;
  */
 @GwtCompatible
 public final class HttpHeaders {
-  private HttpHeaders() {}
+  HttpHeaders() {}
 
   // HTTP Request and Response header fields
 
   /** The HTTP {@code Cache-Control} header field name. */
   public static final String CACHE_CONTROL = "Cache-Control";
+
+  /** The HTTP {@code CDN-Cache-Control} header field name. */
+  public static final String CDN_CACHE_CONTROL = "CDN-Cache-Control";
 
   /** The HTTP {@code Content-Length} header field name. */
   public static final String CONTENT_LENGTH = "Content-Length";

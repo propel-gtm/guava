@@ -86,7 +86,7 @@ public final class Uninterruptibles {
    */
   @J2ktIncompatible
   @GwtIncompatible // concurrency
-  @SuppressWarnings("GoodTime") // should accept a java.time.Duration
+  @SuppressWarnings({"GoodTime", "InterruptedExceptionSwallowed"}) // should accept a java.time.Duration
   public static boolean awaitUninterruptibly(CountDownLatch latch, long timeout, TimeUnit unit) {
     boolean interrupted = false;
     try {
