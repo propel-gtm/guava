@@ -44,7 +44,7 @@ body:
 
   - type: textarea
     attributes:
-      label: 2. What's the best code you can write to accomplish that without the new feature?
+      label: 2. Why do you want this feature?
     validations:
       required: true
 
