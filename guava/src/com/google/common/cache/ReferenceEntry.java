@@ -15,7 +15,6 @@
 package com.google.common.cache;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.annotations.J2ktIncompatible;
 import com.google.common.cache.LocalCache.ValueReference;
 import org.jspecify.annotations.Nullable;
 
@@ -40,7 +39,6 @@ import org.jspecify.annotations.Nullable;
  * </ul>
  */
 @GwtIncompatible
-@J2ktIncompatible
 interface ReferenceEntry<K, V> {
   /** Returns the value reference from this entry. */
   @Nullable ValueReference<K, V> getValueReference();

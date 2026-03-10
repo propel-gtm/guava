@@ -21,7 +21,7 @@ Guava comes in two flavors:
     [the Android flavor](https://github.com/google/guava/wiki/Android). You can
     find the Android Guava source in the [`android` directory].
 
-[`android` directory]: https://github.com/google/guava/tree/master/android
+[`android` directory]: https://github.com/google/guava/tree/master/guava
 
 ## Adding Guava to your build
 

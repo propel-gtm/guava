@@ -19,7 +19,6 @@ import static com.google.common.util.concurrent.Futures.immediateFuture;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.annotations.J2ktIncompatible;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.HashMap;
@@ -145,7 +144,6 @@ final class TestingCacheLoaders {
       return key;
     }
 
-    @J2ktIncompatible
     @GwtIncompatible // reload
     @Override
     public ListenableFuture<Integer> reload(Integer key, Integer oldValue) {
