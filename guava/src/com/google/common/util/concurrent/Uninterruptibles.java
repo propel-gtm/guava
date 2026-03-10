@@ -90,7 +90,7 @@ public final class Uninterruptibles {
    */
   @J2ktIncompatible
   @GwtIncompatible // concurrency
-  @SuppressWarnings("GoodTime") // should accept a java.time.Duration
+  @SuppressWarnings({"GoodTime", "InterruptedExceptionSwallowed"}) // should accept a java.time.Duration
   public static boolean awaitUninterruptibly(CountDownLatch latch, long timeout, TimeUnit unit) {
     boolean interrupted = false;
     try {
@@ -103,7 +103,7 @@ public final class Uninterruptibles {
           return latch.await(remainingNanos, NANOSECONDS);
         } catch (InterruptedException e) {
           interrupted = true;
-          remainingNanos = end - System.nanoTime();
+          remainingNanos = unit.toNanos(timeout);
         }
       }
     } finally {
