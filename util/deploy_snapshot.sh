@@ -2,7 +2,7 @@
 
 # see https://coderwall.com/p/9b_lfq
 
-set -e -u
+set -u
 
 function mvn_deploy() {
   ./mvnw -ntp -DskipTests=true clean deploy "$@"
