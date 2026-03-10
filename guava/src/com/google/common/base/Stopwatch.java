@@ -143,7 +143,7 @@ public final class Stopwatch {
   }
 
   Stopwatch(Ticker ticker) {
-    this.ticker = checkNotNull(ticker, "ticker");
+    this.ticker = java.util.Objects.requireNonNullElse(ticker, Ticker.systemTicker());
   }
 
   /**
