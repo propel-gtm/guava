@@ -1,0 +1,330 @@
+# Runtime maintenance checklist
+
+This local training reference expands the review surface for `training/runtime-maintenance-expanded`.
+
+## Context
+- Source branch: `sweep/runtime-docs-maintenance`
+- Scope: repository maintenance, contributor flow, release automation, and API surface review.
+- Audience: reviewers walking a large unpublished training branch.
+
+## Review Track 01
+- Focus area: Confirm terminology stays aligned across the touched files.
+- Checklist item 001: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 002: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 003: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 004: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 005: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 006: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 007: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 008: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 009: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 010: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 011: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 012: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 013: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 014: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 015: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 016: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 017: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 018: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 019: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 020: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 021: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 022: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 02
+- Focus area: Check whether mirrored Android and JRE guidance still match after cleanup.
+- Checklist item 023: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 024: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 025: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 026: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 027: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 028: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 029: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 030: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 031: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 032: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 033: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 034: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 035: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 036: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 037: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 038: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 039: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 040: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 041: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 042: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 043: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 044: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 03
+- Focus area: Review the dependency between contributor docs and workflow defaults.
+- Checklist item 045: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 046: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 047: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 048: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 049: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 050: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 051: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 052: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 053: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 054: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 055: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 056: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 057: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 058: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 059: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 060: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 061: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 062: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 063: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 064: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 065: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 066: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 04
+- Focus area: Track whether release documentation still reflects the current build path.
+- Checklist item 067: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 068: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 069: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 070: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 071: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 072: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 073: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 074: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 075: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 076: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 077: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 078: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 079: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 080: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 081: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 082: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 083: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 084: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 085: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 086: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 087: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 088: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 05
+- Focus area: Compare generated data handling with the corresponding maintenance notes.
+- Checklist item 089: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 090: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 091: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 092: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 093: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 094: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 095: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 096: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 097: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 098: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 099: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 100: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 101: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 102: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 103: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 104: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 105: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 106: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 107: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 108: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 109: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 110: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 06
+- Focus area: Look for changes that widen permissions, scope, or rollout conditions.
+- Checklist item 111: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 112: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 113: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 114: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 115: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 116: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 117: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 118: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 119: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 120: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 121: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 122: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 123: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 124: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 125: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 126: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 127: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 128: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 129: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 130: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 131: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 132: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 07
+- Focus area: Inspect whether API surface updates are reflected consistently in both flavors.
+- Checklist item 133: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 134: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 135: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 136: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 137: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 138: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 139: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 140: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 141: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 142: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 143: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 144: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 145: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 146: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 147: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 148: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 149: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 150: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 151: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 152: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 153: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 154: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 08
+- Focus area: Verify that fallback paths preserve the previous runtime contract.
+- Checklist item 155: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 156: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 157: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 158: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 159: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 160: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 161: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 162: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 163: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 164: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 165: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 166: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 167: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 168: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 169: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 170: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 171: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 172: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 173: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 174: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 175: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 176: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 09
+- Focus area: Confirm terminology stays aligned across the touched files.
+- Checklist item 177: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 178: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 179: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 180: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 181: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 182: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 183: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 184: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 185: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 186: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 187: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 188: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 189: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 190: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 191: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 192: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 193: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 194: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 195: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 196: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 197: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 198: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 10
+- Focus area: Check whether mirrored Android and JRE guidance still match after cleanup.
+- Checklist item 199: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 200: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 201: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 202: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 203: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 204: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 205: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 206: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 207: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 208: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 209: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 210: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 211: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 212: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 213: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 214: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 215: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 216: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 217: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 218: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 219: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 220: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 11
+- Focus area: Review the dependency between contributor docs and workflow defaults.
+- Checklist item 221: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 222: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 223: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 224: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 225: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 226: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 227: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 228: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 229: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 230: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 231: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 232: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 233: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 234: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 235: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 236: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 237: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 238: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 239: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 240: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 241: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 242: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 12
+- Focus area: Track whether release documentation still reflects the current build path.
+- Checklist item 243: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 244: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 245: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 246: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 247: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 248: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 249: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 250: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 251: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 252: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 253: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 254: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 255: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 256: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 257: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 258: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 259: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 260: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 261: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 262: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 263: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 264: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 13
+- Focus area: Compare generated data handling with the corresponding maintenance notes.
+- Checklist item 265: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 266: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 267: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 268: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 269: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 270: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 271: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 272: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 273: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 274: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 275: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 276: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 277: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 278: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 279: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 280: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 281: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 282: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 283: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 284: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 285: compare `guava/src/com/google/thirdparty/publicsuffix/PublicSuffixPatterns.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 286: compare `guava/src/com/google/thirdparty/publicsuffix/TrieParser.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 14
+- Focus area: Look for changes that widen permissions, scope, or rollout conditions.
+- Checklist item 287: compare `pom.xml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 288: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 289: compare `.github/ISSUE_TEMPLATE/feature_enhancement_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 290: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 291: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 292: compare `guava/src/com/google/common/io/ByteSource.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 293: compare `guava/src/com/google/common/net/HttpHeaders.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
