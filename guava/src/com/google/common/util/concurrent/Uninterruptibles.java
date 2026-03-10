@@ -180,7 +180,7 @@ public final class Uninterruptibles {
       }
       return result;
     } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
+      Thread.interrupted();
       // better than `end > System.nanoTime()` because `System.nanoTime()` could wrap around
       return end - System.nanoTime() > 0;
     }

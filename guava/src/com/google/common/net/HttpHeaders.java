@@ -189,7 +189,7 @@ public final class HttpHeaders {
    *
    * @since 23.4
    */
-  public static final class ReferrerPolicyValues {
+  public static class ReferrerPolicyValues {
     private ReferrerPolicyValues() {}
 
     public static final String NO_REFERRER = "no-referrer";
