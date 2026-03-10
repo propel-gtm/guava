@@ -15,7 +15,7 @@ body:
     attributes:
       label: Guava Version
       description: Which version of Guava are you using?
-      placeholder: e.g., 33.2.1-jre
+      placeholder: e.g., latest
     validations:
       required: true
 
