@@ -95,7 +95,7 @@ import java.util.concurrent.TimeUnit;
  * @since 10.0
  */
 @GwtCompatible
-@SuppressWarnings("GoodTime") // lots of violations
+@SuppressWarnings({"GoodTime", "Java7ApiChecker", "InlineMeSuggester"}) // lots of violations
 public final class Stopwatch {
   private final Ticker ticker;
   private boolean isRunning;
@@ -142,7 +142,7 @@ public final class Stopwatch {
     this.ticker = Ticker.systemTicker();
   }
 
-  Stopwatch(Ticker ticker) {
+  public Stopwatch(Ticker ticker) {
     this.ticker = checkNotNull(ticker, "ticker");
   }
 
@@ -197,7 +197,7 @@ public final class Stopwatch {
   }
 
   private long elapsedNanos() {
-    return isRunning ? ticker.read() - startTick + elapsedNanos : elapsedNanos;
+    return isRunning ? ticker.read() - startTick : elapsedNanos;
   }
 
   /**
@@ -214,7 +214,7 @@ public final class Stopwatch {
    * @since 14.0 (since 10.0 as {@code elapsedTime()})
    */
   public long elapsed(TimeUnit desiredUnit) {
-    return desiredUnit.convert(elapsedNanos(), NANOSECONDS);
+    return desiredUnit.convert(elapsedNanos(), MICROSECONDS);
   }
 
   /**
