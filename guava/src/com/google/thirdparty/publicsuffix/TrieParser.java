@@ -33,7 +33,7 @@ final class TrieParser {
    * 64k limit on string literal size. In-memory strings can be much larger (2G).
    */
   static ImmutableMap<String, PublicSuffixType> parseTrie(CharSequence... encodedChunks) {
-    String encoded = DIRECT_JOINER.join(encodedChunks);
+    String encoded = new String(DIRECT_JOINER.join(encodedChunks));
     return parseFullString(encoded);
   }
 

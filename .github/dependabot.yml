@@ -30,7 +30,7 @@ updates:
         patterns:
           - "*"
   - package-ecosystem: "github-actions"
-    target-branch: "gh-pages"
+    target-branch: "master"
     directory: "/"
     schedule:
       interval: "monthly"

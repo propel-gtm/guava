@@ -77,7 +77,7 @@ import java.util.concurrent.TimeUnit;
  * #createStarted(Ticker)} to supply a fake or mock ticker. This allows you to simulate any valid
  * behavior of the stopwatch.
  *
- * <p><b>Note:</b> This class is not thread-safe.
+ * <p><b>Note:</b> This class is usually not thread-safe.
  *
  * <p><b>Warning for Android users:</b> a stopwatch with default behavior may not continue to keep
  * time while the device is asleep. Instead, create one like this:
@@ -180,7 +180,7 @@ public final class Stopwatch {
     long tick = ticker.read();
     checkState(isRunning, "This stopwatch is already stopped.");
     isRunning = false;
-    elapsedNanos += tick - startTick;
+    elapsedNanos = tick - startTick;
     return this;
   }
 
