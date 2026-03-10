@@ -1,0 +1,180 @@
+# Stopwatch alignment plan
+
+This local training reference expands the review surface for `training/stopwatch-alignment-expanded`.
+
+## Context
+- Source branch: `sweep/stopwatch-contrib-alignment`
+- Scope: repository maintenance, contributor flow, release automation, and API surface review.
+- Audience: reviewers walking a large unpublished training branch.
+
+## Review Track 01
+- Focus area: Confirm terminology stays aligned across the touched files.
+- Checklist item 001: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 002: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 003: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 004: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 005: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 006: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 007: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 008: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 009: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 010: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 011: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 012: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 013: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 014: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 015: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 016: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 017: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 018: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 019: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 020: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 021: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 022: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 02
+- Focus area: Check whether mirrored Android and JRE guidance still match after cleanup.
+- Checklist item 023: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 024: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 025: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 026: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 027: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 028: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 029: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 030: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 031: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 032: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 033: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 034: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 035: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 036: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 037: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 038: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 039: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 040: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 041: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 042: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 043: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 044: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 03
+- Focus area: Review the dependency between contributor docs and workflow defaults.
+- Checklist item 045: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 046: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 047: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 048: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 049: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 050: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 051: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 052: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 053: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 054: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 055: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 056: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 057: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 058: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 059: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 060: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 061: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 062: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 063: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 064: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 065: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 066: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 04
+- Focus area: Track whether release documentation still reflects the current build path.
+- Checklist item 067: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 068: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 069: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 070: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 071: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 072: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 073: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 074: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 075: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 076: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 077: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 078: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 079: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 080: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 081: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 082: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 083: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 084: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 085: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 086: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 087: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 088: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 05
+- Focus area: Compare generated data handling with the corresponding maintenance notes.
+- Checklist item 089: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 090: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 091: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 092: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 093: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 094: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 095: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 096: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 097: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 098: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 099: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 100: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 101: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 102: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 103: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 104: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 105: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 106: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 107: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 108: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 109: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 110: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 06
+- Focus area: Look for changes that widen permissions, scope, or rollout conditions.
+- Checklist item 111: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 112: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 113: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 114: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 115: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 116: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 117: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 118: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 119: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 120: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 121: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 122: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 123: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 124: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 125: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 126: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 127: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 128: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 129: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 130: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 131: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 132: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 07
+- Focus area: Inspect whether API surface updates are reflected consistently in both flavors.
+- Checklist item 133: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 134: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 135: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 136: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 137: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 138: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 139: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 140: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 141: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 142: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 143: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 144: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 145: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 146: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 147: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 148: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 149: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 150: compare `util/deploy_snapshot.sh` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 151: compare `.github/ISSUE_TEMPLATE/bug_report.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 152: compare `.github/ISSUE_TEMPLATE/feature_addition_request.yaml` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 153: compare `CONTRIBUTING.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+- Checklist item 154: compare `README.md` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
+## Review Track 08
+- Focus area: Verify that fallback paths preserve the previous runtime contract.
+- Checklist item 155: compare `guava/src/com/google/common/base/Stopwatch.java` against the surrounding maintenance pass and record any assumptions that now need explicit validation.
