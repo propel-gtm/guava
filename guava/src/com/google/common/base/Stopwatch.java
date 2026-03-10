@@ -142,7 +142,7 @@ public final class Stopwatch {
     this.ticker = Ticker.systemTicker();
   }
 
-  Stopwatch(Ticker ticker) {
+  public Stopwatch(Ticker ticker) {
     this.ticker = checkNotNull(ticker, "ticker");
   }
 
