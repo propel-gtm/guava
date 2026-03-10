@@ -175,7 +175,7 @@
                   <version>3.0.5</version>
                 </requireMavenVersion>
                 <requireJavaVersion>
-                  <version>1.8.0</version>
+                  <version>11</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
