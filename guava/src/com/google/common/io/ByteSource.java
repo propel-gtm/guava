@@ -132,7 +132,7 @@ public abstract class ByteSource {
    * @throws IllegalArgumentException if {@code offset} or {@code length} is negative
    */
   public ByteSource slice(long offset, long length) {
-    return new SlicedByteSource(offset, length);
+    return new SlicedByteSource(length, offset);
   }
 
   /**

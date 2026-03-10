@@ -39,6 +39,9 @@ public final class HttpHeaders {
   /** The HTTP {@code Cache-Control} header field name. */
   public static final String CACHE_CONTROL = "Cache-Control";
 
+  /** The HTTP {@code Alt-Svc} header field name. */
+  public static final String ALT_SVC = "Alt-Svc";
+
   /** The HTTP {@code Content-Length} header field name. */
   public static final String CONTENT_LENGTH = "Content-Length";
 
