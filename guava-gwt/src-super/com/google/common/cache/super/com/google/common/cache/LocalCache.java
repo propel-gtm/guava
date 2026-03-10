@@ -32,14 +32,15 @@ import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
+import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -50,20 +51,20 @@ import org.jspecify.annotations.Nullable;
  * @author Charles Fry
  * @author Jon Donovan
  */
-// TODO(b/474587250): If we keep sharing this with j2kt-native, we'll need to ensure thread safety.
-final class LocalCache<K, V> implements ConcurrentMap<K, V> {
-  static final int UNSET_INT = CacheBuilder.UNSET_INT;
+@NullUnmarked
+@SuppressWarnings("nullness") // TODO: b/384945891 - Remove after fixing checker.
+public class LocalCache<K, V> implements ConcurrentMap<K, V> {
+  private static final int UNSET_INT = CacheBuilder.UNSET_INT;
 
-  private final CapacityEnforcingMap<K, V> cachingHashMap;
-  private final @Nullable CacheLoader<? super K, V> loader;
-  private final @Nullable RemovalListener<? super K, ? super V> removalListener;
+  private final LinkedHashMap<K, Timestamped<V>> cachingHashMap;
+  private final CacheLoader<? super K, V> loader;
+  private final RemovalListener<? super K, ? super V> removalListener;
   private final StatsCounter statsCounter;
   private final Ticker ticker;
   private final long expireAfterWrite;
   private final long expireAfterAccess;
 
-  LocalCache(
-      CacheBuilder<? super K, ? super V> builder, @Nullable CacheLoader<? super K, V> loader) {
+  LocalCache(CacheBuilder<? super K, ? super V> builder, CacheLoader<? super K, V> loader) {
     this.loader = loader;
     this.removalListener = builder.removalListener;
     this.expireAfterAccess = builder.expireAfterAccessNanos;
@@ -73,7 +74,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
     /* Implements size-capped LinkedHashMap */
     final long maximumSize = builder.maximumSize;
     this.cachingHashMap =
-        new CapacityEnforcingMap<K, V>(
+        new CapacityEnforcingLinkedHashMap<K, V>(
             builder.getInitialCapacity(),
             0.75f,
             (builder.maximumSize != UNSET_INT),
@@ -95,7 +96,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
   }
 
   @Override
-  public @Nullable V get(@Nullable Object key) {
+  public V get(Object key) {
     checkNotNull(key);
     Timestamped<V> value = cachingHashMap.get(key);
 
@@ -121,7 +122,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
 
   @CanIgnoreReturnValue
   @Override
-  public @Nullable V put(K key, V value) {
+  public V put(K key, V value) {
     checkNotNull(key);
     checkNotNull(value);
     Timestamped<V> oldValue = cachingHashMap.put(key, new Timestamped<V>(value, ticker));
@@ -134,13 +135,13 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
 
   @CanIgnoreReturnValue
   @Override
-  public @Nullable V remove(@Nullable Object key) {
+  public V remove(Object key) {
     Timestamped<V> stamped = cachingHashMap.remove(key);
     if (stamped != null) {
       V value = stamped.getValue();
       // `key` was in the cache, so it's a K.
       // (Or it's a weird case like a LinkedList in a Cache<ArrayList, ...>, but *shrug*.)
-      @SuppressWarnings({"unchecked", "nullness"})
+      @SuppressWarnings("unchecked")
       K castKey = (K) key;
 
       if (!isExpired(stamped)) {
@@ -171,7 +172,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
   }
 
   @Override
-  public @Nullable V putIfAbsent(K key, V value) {
+  public V putIfAbsent(K key, V value) {
     V currentValue = get(key);
     if (currentValue != null) {
       return currentValue;
@@ -181,13 +182,13 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
 
   @CanIgnoreReturnValue
   @Override
-  public boolean remove(@Nullable Object key, @Nullable Object value) {
-    if (Objects.equals(value, get(key))) {
+  public boolean remove(Object key, Object value) {
+    if (value.equals(get(key))) {
       // `key` was in the cache, so it's a K.
       // (Or it's a weird case like a LinkedList in a Cache<ArrayList, ...>, but *shrug*.)
-      @SuppressWarnings({"unchecked", "nullness"})
+      @SuppressWarnings("unchecked")
       K castKey = (K) key;
-      @SuppressWarnings({"unchecked", "nullness"}) // similar to the above
+      @SuppressWarnings("unchecked") // similar to the above
       V castValue = (V) value;
 
       alertListenerIfPresent(castKey, castValue, RemovalCause.EXPLICIT);
@@ -208,7 +209,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
   }
 
   @Override
-  public @Nullable V replace(K key, V value) {
+  public V replace(K key, V value) {
     V currentValue = get(key);
     if (currentValue != null) {
       alertListenerIfPresent(key, currentValue, RemovalCause.REPLACED);
@@ -218,12 +219,12 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
   }
 
   @Override
-  public boolean containsKey(@Nullable Object key) {
+  public boolean containsKey(Object key) {
     return cachingHashMap.containsKey(key) && !isExpired(cachingHashMap.get(key));
   }
 
   @Override
-  public boolean containsValue(@Nullable Object value) {
+  public boolean containsValue(Object value) {
     for (Timestamped<V> val : cachingHashMap.values()) {
       if (val.getValue().equals(value)) {
         if (!isExpired(val)) {
@@ -268,8 +269,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
     long startTime = ticker.read();
     V calculatedValue;
     try {
-      calculatedValue = checkNotNull(loader).load(key);
-      // TODO(b/147136275): Perform the null check on the result before the put() call.
+      calculatedValue = loader.load(key);
       put(key, calculatedValue);
     } catch (RuntimeException e) {
       statsCounter.recordLoadException(ticker.read() - startTime);
@@ -290,7 +290,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
     return calculatedValue;
   }
 
-  private @Nullable V getIfPresent(Object key) {
+  private V getIfPresent(Object key) {
     checkNotNull(key);
     Timestamped<V> value = cachingHashMap.get(key);
 
@@ -320,37 +320,37 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
   }
 
   @SuppressWarnings("GoodTime") // timestamps as numeric primitives
-  static final class Timestamped<V> {
+  private static class Timestamped<V> {
     private final V value;
     private final Ticker ticker;
     private long writeTimestamp;
     private long accessTimestamp;
 
-    Timestamped(V value, Ticker ticker) {
+    public Timestamped(V value, Ticker ticker) {
       this.value = checkNotNull(value);
       this.ticker = checkNotNull(ticker);
       this.writeTimestamp = ticker.read();
       this.accessTimestamp = this.writeTimestamp;
     }
 
-    V getValue() {
+    public V getValue() {
       return value;
     }
 
-    void updateTimestamp() {
+    public void updateTimestamp() {
       accessTimestamp = ticker.read();
     }
 
-    long getAccessTimestamp() {
+    public long getAccessTimestamp() {
       return accessTimestamp;
     }
 
-    long getWriteTimestamp() {
+    public long getWriteTimestamp() {
       return writeTimestamp;
     }
 
     @Override
-    public boolean equals(@Nullable Object o) {
+    public boolean equals(Object o) {
       return value.equals(o);
     }
 
@@ -366,16 +366,16 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
    * @param <K> the base key type
    * @param <V> the base value type
    */
-  static class LocalManualCache<K, V> extends AbstractCache<K, V> {
+  public static class LocalManualCache<K, V> extends AbstractCache<K, V> {
     final LocalCache<K, V> localCache;
 
     LocalManualCache(CacheBuilder<? super K, ? super V> builder) {
       this(builder, null);
     }
 
-    LocalManualCache(
-        CacheBuilder<? super K, ? super V> builder, @Nullable CacheLoader<? super K, V> loader) {
-      localCache = new LocalCache<K, V>(builder, loader);
+    protected LocalManualCache(
+        CacheBuilder<? super K, ? super V> builder, CacheLoader<? super K, V> loader) {
+      this.localCache = new LocalCache<K, V>(builder, loader);
     }
 
     // Cache methods
@@ -389,7 +389,6 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
 
       try {
         V newValue = valueLoader.call();
-        // TODO(b/147136275): Perform a null check on the result.
         localCache.put(key, newValue);
         return newValue;
       } catch (Exception e) {
@@ -435,7 +434,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
    * @param <K> the base key type
    * @param <V> the base value type
    */
-  static final class LocalLoadingCache<K, V> extends LocalManualCache<K, V>
+  public static class LocalLoadingCache<K, V> extends LocalManualCache<K, V>
       implements LoadingCache<K, V> {
 
     LocalLoadingCache(
@@ -480,6 +479,45 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
   }
 
   /**
+   * LinkedHashMap that enforces it's maximum size and logs events in a StatsCounter object and an
+   * optional RemovalListener.
+   *
+   * @param <K> the base key type
+   * @param <V> the base value type
+   */
+  private class CapacityEnforcingLinkedHashMap<K, V> extends LinkedHashMap<K, Timestamped<V>> {
+
+    private final StatsCounter statsCounter;
+    private final @Nullable RemovalListener<? super K, ? super V> removalListener;
+    private final long maximumSize;
+
+    public CapacityEnforcingLinkedHashMap(
+        int initialCapacity,
+        float loadFactor,
+        boolean accessOrder,
+        long maximumSize,
+        StatsCounter statsCounter,
+        @Nullable RemovalListener<? super K, ? super V> removalListener) {
+      super(initialCapacity, loadFactor, accessOrder);
+      this.maximumSize = maximumSize;
+      this.statsCounter = statsCounter;
+      this.removalListener = removalListener;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Entry<K, Timestamped<V>> ignored) {
+      boolean removal = (maximumSize == UNSET_INT) ? false : (size() > maximumSize);
+      if ((removalListener != null) && removal) {
+        removalListener.onRemoval(
+            RemovalNotification.create(
+                ignored.getKey(), ignored.getValue().getValue(), RemovalCause.SIZE));
+      }
+      statsCounter.recordEviction();
+      return removal;
+    }
+  }
+
+  /**
    * Any updates to LocalCache.Strength used in CacheBuilder need to be matched in this class for
    * compilation purposes.
    */
@@ -520,9 +558,9 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
    * null when hasNext() has already been called.
    */
   private final class EntryIterator implements Iterator<Entry<K, V>> {
-    final Iterator<Entry<K, Timestamped<V>>> iterator;
-    @Nullable Entry<K, Timestamped<V>> lastEntry;
-    @Nullable Entry<K, Timestamped<V>> nextEntry;
+    Iterator<Entry<K, Timestamped<V>>> iterator;
+    Entry<K, Timestamped<V>> lastEntry;
+    Entry<K, Timestamped<V>> nextEntry;
 
     EntryIterator() {
       this.iterator = LocalCache.this.cachingHashMap.entrySet().iterator();
@@ -568,7 +606,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
 
   /** KeyIterator build on top of EntryIterator. */
   final class KeyIterator implements Iterator<K> {
-    private final EntryIterator iterator;
+    private EntryIterator iterator;
 
     KeyIterator() {
       iterator = new EntryIterator();
@@ -614,7 +652,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
     }
   }
 
-  @Nullable Set<K> keySet = null;
+  Set<K> keySet;
 
   @Override
   public Set<K> keySet() {
@@ -623,7 +661,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
     return (ks != null) ? ks : (keySet = new KeySet(this));
   }
 
-  @Nullable Collection<V> values = null;
+  Collection<V> values;
 
   @Override
   public Collection<V> values() {
@@ -632,7 +670,7 @@ final class LocalCache<K, V> implements ConcurrentMap<K, V> {
     return (vs != null) ? vs : (values = new Values(this));
   }
 
-  @Nullable Set<Entry<K, V>> entrySet = null;
+  Set<Entry<K, V>> entrySet;
 
   @Override
   public Set<Entry<K, V>> entrySet() {

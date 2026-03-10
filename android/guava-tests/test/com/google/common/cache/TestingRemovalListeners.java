@@ -16,10 +16,9 @@ package com.google.common.cache;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.annotations.J2ktIncompatible;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Utility {@link RemovalListener} implementations intended for use in testing.
@@ -27,6 +26,7 @@ import org.jspecify.annotations.Nullable;
  * @author mike nonemacher
  */
 @GwtCompatible
+@NullUnmarked
 final class TestingRemovalListeners {
 
   /** Returns a new no-op {@code RemovalListener}. */
@@ -35,7 +35,6 @@ final class TestingRemovalListeners {
   }
 
   /** Type-inferring factory method for creating a {@link QueuingRemovalListener}. */
-  @J2ktIncompatible
   @GwtIncompatible // ConcurrentLinkedQueue
   static <K, V> QueuingRemovalListener<K, V> queuingRemovalListener() {
     return new QueuingRemovalListener<>();
@@ -47,7 +46,6 @@ final class TestingRemovalListeners {
   }
 
   /** {@link RemovalListener} that adds all {@link RemovalNotification} objects to a queue. */
-  @J2ktIncompatible
   @GwtIncompatible // ConcurrentLinkedQueue
   static class QueuingRemovalListener<K, V> extends ConcurrentLinkedQueue<RemovalNotification<K, V>>
       implements RemovalListener<K, V> {
@@ -64,7 +62,7 @@ final class TestingRemovalListeners {
    */
   static class CountingRemovalListener<K, V> implements RemovalListener<K, V> {
     private final AtomicInteger count = new AtomicInteger();
-    private volatile @Nullable RemovalNotification<K, V> lastNotification;
+    private volatile RemovalNotification<K, V> lastNotification;
 
     @Override
     public void onRemoval(RemovalNotification<K, V> notification) {

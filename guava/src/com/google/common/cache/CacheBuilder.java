@@ -21,7 +21,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.annotations.J2ktIncompatible;
 import com.google.common.base.Ascii;
 import com.google.common.base.Equivalence;
 import com.google.common.base.MoreObjects;
@@ -724,7 +723,6 @@ public final class CacheBuilder<K, V> {
    */
   @J2ObjCIncompatible
   @GwtIncompatible // Duration
-  @J2ktIncompatible
   @SuppressWarnings("GoodTime") // Duration decomposition
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> expireAfterWrite(Duration duration) {
@@ -798,7 +796,6 @@ public final class CacheBuilder<K, V> {
    *     href="https://github.com/google/guava#guava-google-core-libraries-for-java">flavor</a>)
    */
   @J2ObjCIncompatible
-  @J2ktIncompatible
   @GwtIncompatible // Duration
   @SuppressWarnings("GoodTime") // Duration decomposition
   @CanIgnoreReturnValue
@@ -882,7 +879,6 @@ public final class CacheBuilder<K, V> {
    *     href="https://github.com/google/guava#guava-google-core-libraries-for-java">flavor</a>)
    */
   @J2ObjCIncompatible
-  @J2ktIncompatible
   @GwtIncompatible // Duration
   @SuppressWarnings("GoodTime") // Duration decomposition
   @CanIgnoreReturnValue
@@ -1127,7 +1123,6 @@ public final class CacheBuilder<K, V> {
    * {@link Long#MAX_VALUE} or {@link Long#MIN_VALUE}. This behavior can be useful when decomposing
    * a duration in order to call a legacy API which requires a {@code long, TimeUnit} pair.
    */
-  @J2ktIncompatible
   @GwtIncompatible // Duration
   @SuppressWarnings("GoodTime") // duration decomposition
   private static long toNanosSaturated(Duration duration) {
