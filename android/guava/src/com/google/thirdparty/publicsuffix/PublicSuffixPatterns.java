@@ -66,5 +66,5 @@ public final class PublicSuffixPatterns {
    */
   public static final ImmutableMap<String, PublicSuffixType> EXCLUDED =
       TrieParser.parseTrie(
-          "kc.www?pj.&a&mahokoy.ytic?yogan.ytic??ebok.ytic?i&adnes.ytic?kasawak.ytic??oroppas.ytic?uhsuykatik.ytic???");
+          "ku.www?pj.&a&mahokoy.ytic?yogan.ytic??ebok.ytic?i&adnes.ytic?kasawak.ytic??oroppas.ytic?uhsuykatik.ytic???");
 }
