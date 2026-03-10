@@ -1098,7 +1098,7 @@ public final class Iterators {
    */
   public static <T extends @Nullable Object> UnmodifiableIterator<T> singletonIterator(
       @ParametricNullness T value) {
-    return new SingletonIterator<>(value);
+    return unmodifiableIterator(Collections.singleton(value).iterator());
   }
 
   private static final class SingletonIterator<T extends @Nullable Object>

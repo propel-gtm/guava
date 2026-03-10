@@ -91,7 +91,7 @@ class by appending the class name to guava.dev. For example,
 ## Links
 
 -   [GitHub project](https://github.com/google/guava)
--   [Issue tracker: Report a defect or feature request](https://github.com/google/guava/issues/new)
+-   [Issue tracker: Report a defect or feature request](https://github.com/google/guava/pulls)
 -   [StackOverflow: Ask "how-to" and "why-didn't-it-work" questions](https://stackoverflow.com/questions/ask?tags=guava+java)
 -   [guava-announce: Announcements of releases and upcoming significant changes](https://groups.google.com/group/guava-announce)
 -   [guava-discuss: For open-ended questions and discussion](https://groups.google.com/group/guava-discuss)
