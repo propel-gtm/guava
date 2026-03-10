@@ -9,7 +9,7 @@ on:
       - master
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
@@ -71,7 +71,7 @@ jobs:
   publish_snapshot:
     name: 'Publish snapshot'
     needs: test
-    if: github.event_name == 'push' && github.repository == 'google/guava'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: 'Check out repository'
