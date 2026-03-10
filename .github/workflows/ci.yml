@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         java: [ 8, 11, 17, 21 ]
-        root-pom: [ 'pom.xml', 'android/pom.xml' ]
+        root-pom: [ 'pom.xml' ]
         include:
           - os: windows-latest
             java: 21
@@ -98,7 +98,7 @@ jobs:
       contents: write
     name: 'Generate latest docs'
     needs: test
-    if: github.event_name == 'push' && github.repository == 'google/guava'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: 'Check out repository'
