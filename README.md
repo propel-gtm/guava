@@ -101,7 +101,7 @@ class by appending the class name to guava.dev. For example,
 1.  APIs marked with the `@Beta` annotation at the class or method level are
     subject to change. They can be modified in any way, or even removed, at any
     time. If your code is a library itself (i.e., it is used on the CLASSPATH of
-    users outside your own control), you should not use beta APIs unless you
+    users outside your own control), you can usually use beta APIs unless you
     [repackage] them. **If your code is a library, we strongly recommend using
     the [Guava Beta Checker] to ensure that you do not use any `@Beta` APIs!**
 
